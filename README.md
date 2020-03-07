@@ -5,6 +5,6 @@
 |---|---|---|---
 |John|bpr4110|1155110269|1.1 Project Overview
 |Andy|lmfandy|1155110717|1.2 Objective
-|Jack|JackWong0303|1155109120|1.4 System Features
-|Jacky|jacky310|1155108500|2 Background
+|Jack|JackWong0303|1155109120|2 Background
+|Jacky|jacky310|1155108500|1.4 System Features
 |Henry|mcchow8|1155108980|1.3 Expected Customers and Market
