@@ -1,10 +1,10 @@
 # CSCI-3100-Project Group No. 8
 
 ## Member
-|Name|Username|Student ID|
-|---|---|---
-|John|bpr4110|1155110269
-|Andy|lmfandy|1155110717
-|Jack|JackWong0303|1155109120
-|Jacky|???|???
-|Henry|mcchow8|???
+|Name|Username|Student ID|Role|
+|---|---|---|---
+|John|bpr4110|1155110269|1.1 Project Overview
+|Andy|lmfandy|1155110717|1.2 Objective
+|Jack|JackWong0303|1155109120|2 Background
+|Jacky|jacky310|1155108500|1.4 System Features
+|Henry|mcchow8|1155108980|1.3 Expected Customers and Market
