@@ -32,7 +32,7 @@
       </form>
     </div>
 </nav>
-<div class="container-fluid" width="80%">
+<div class="container" >
   <ul id="clothingnav1" class="nav nav-tabs" role="tablist">
     <li class="nav-item"> <a class="nav-link active" href="#home1" id="hometab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Booking Record</a> </li>
     <li class="nav-item"> <a class="nav-link" href="#paneTwo1" role="tab" id="hatstab1" data-toggle="tab" aria-controls="hats">Your Information</a> </li>
@@ -40,25 +40,34 @@
   </ul>
   <!-- Content Panel -->
   <div id="clothingnavcontent1" class="tab-content">
-    <table width="100%" border="1" align="center">
-      <tbody>
-        <tr>
-          <td>Date</td>
-          <td>Name</td>
-          <td>Option</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="container">        
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Booking Records</th>
+        <th>Name</th>
+        <th>Option</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
     <div role="tabpanel" class="tab-pane fade show active" id="home1" aria-labelledby="hometab1">
     </div>
     <div role="tabpanel" class="tab-pane fade" id="paneTwo1" aria-labelledby="hatstab1">
