@@ -1,4 +1,11 @@
 $(function(){
+  $("#searchButton").click(function(){
+    $("#searchButton").hide();
+    $("#searchForm").show();
+  });
+});
+
+$(function(){
   $("#loginSignupBtn").click(function(){
     $("#loginSignupPage").show();
     $("#homePage").hide();
