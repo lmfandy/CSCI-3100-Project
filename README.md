@@ -1,7 +1,7 @@
 # CSCI-3100-Project Group No. 8
 
 ## How to use server to open express server
-1. Make sure you have install node.js (https://nodejs.org/en/download/)
+1. Make sure you have installed node.js (https://nodejs.org/en/download/)
 2. Connect CUHK VPN so that the server can connect to MongoDB altas
 3. Use CLI to the server folder and run
 ```
