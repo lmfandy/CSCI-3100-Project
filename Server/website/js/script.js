@@ -15,19 +15,6 @@ $(function () {
   $("#createCustomerBtn").click(() => togglePages(2));
   $("#createOwnerBtn").click(() => togglePages(3));
 
-  //show the search form
-  // $("#startSearchBtn").click(() => {
-  //   $("#startSearchBtn").fadeOut("normal", () => $("#searchForm").slideDown("normal"));
-  //   return false;
-  // });
-  //
-  //
-  // //show the search result
-  // $("#searchBtn").click(function () {
-  //   $('html').animate({ scrollTop: $("#searchResult").offset().top }, 600);
-  //   return false;
-  // });
-
   $(function(){
     $("#searchNowBtn").click(function(){
       $("#mainSearchBar").slideDown("slow");
@@ -44,8 +31,8 @@ $(function () {
   $("#loginBtn").click(function () {
     //this is just a sample function.
     //we will not check the login info using this simple approach.
-    var email = document.getElementById("exampleInputEmail1").value;
-    var password = document.getElementById("exampleInputPassword1").value;
+    var email = document.getElementById("CustomerLoginEmail").value;
+    var password = document.getElementById("CustomerLoginPassword").value;
     switch (email) {
       case "customer":
         if (password == "123456")
@@ -76,4 +63,27 @@ $(function(){
   range.oninput = function() {
     output.innerHTML = "Each price / hr: $" + (this.value*(20) + 20);
   }
+});
+
+$(function(){
+  $("#Signup_CustomerSubmitBtn").click(() => {
+    var username = document.getElementById("Signup_CustomerUsername").value;
+    var email = document.getElementById("Signup_CustomerEmail").value;
+    var password = document.getElementById("Signup_CustomerPassword").value;
+    var phone = document.getElementById("Signup_CustomerPhone").value;
+    var customer = {
+      "username": username,
+      "email": email,
+      "password": password,
+      "phone": phone
+    }
+    console.log(customer);
+    $.ajax({
+      type: "POST",
+      async: false,
+      dataType: "json",
+      data: customer,
+      url:"/CustomerSignUp"
+    });
+  });
 });

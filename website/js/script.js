@@ -15,19 +15,6 @@ $(function () {
   $("#createCustomerBtn").click(() => togglePages(2));
   $("#createOwnerBtn").click(() => togglePages(3));
 
-  //show the search form
-  // $("#startSearchBtn").click(() => {
-  //   $("#startSearchBtn").fadeOut("normal", () => $("#searchForm").slideDown("normal"));
-  //   return false;
-  // });
-  //
-  //
-  // //show the search result
-  // $("#searchBtn").click(function () {
-  //   $('html').animate({ scrollTop: $("#searchResult").offset().top }, 600);
-  //   return false;
-  // });
-
   $(function(){
     $("#searchNowBtn").click(function(){
       $("#mainSearchBar").slideDown("slow");
