@@ -1,4 +1,6 @@
 # CSCI-3100-Project Group No. 8
+## Remainder
+If you would like to change the web file, please go to the website folder under the server folder
 
 ## How to use server to open express server
 1. Make sure you have installed node.js (https://nodejs.org/en/download/)
