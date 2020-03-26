@@ -8,8 +8,16 @@ const app = express();
 
 app.use(express.static('website'));
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.get('/', (req,res) => {
+  res.sendFile(path.join(__dirname + './website/index.html'));
+});
+
+// app.get('/', (req,res) => {
+//   res.sendFile(path.join(__dirname + 'hello-react-app/public/index.html'));
+// });
 
 app.get('/info' , (req,res) => {
   client.connect(err => {

@@ -1,7 +1,7 @@
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {value: '', startDate: new Date()};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -31,9 +31,21 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <form className="p-3 mb-2 bg-dark text-white" onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Party Room Name"/>
-        <input type="submit" value="Search" />
+      <form className="p-3 mb-2 bg-light text-dark" onSubmit={this.handleSubmit}>
+        <div style={{padding: "0px 40px"}}>
+          <input className="form-control" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Party Room Name"/>
+        </div>
+        <div className="d-flex">
+          <div className="flex-fill">
+            <p>Date:
+            <DatePicker selected={this.state.startDate} onChange={date => setStartDate(date)} />
+            <input className="form-control" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Party Room Name"/>
+            </p>
+            <input className="form-control" type="text" value={this.state.value} onChange={this.handleChange} placeholder="Party Room Name"/>
+          </div>
+          <div className="flex-fill">
+          </div>
+        </div>
       </form>
     );
   }
@@ -41,5 +53,5 @@ class SearchBar extends React.Component {
 
 ReactDOM.render(
   <SearchBar />,
-  document.getElementById('searchBar')
+  document.getElementById('mainSearchBar')
 );
