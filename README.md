@@ -9,6 +9,7 @@ If you would like to change the web file, please go to the website folder under 
 ```
 node index.js
 ```
+4. For the mongoDB, you may sign in on https://account.mongodb.com/account/login and login with ac and password provided in whatsapp. Then, you can click the "collection" and see the data.
 
 ## Member
 |Name|Username|Student ID
