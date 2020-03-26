@@ -1,5 +1,5 @@
 # CSCI-3100-Project Group No. 8
-## Remainder
+## Reminder
 If you would like to change the web file, please go to the website folder under the server folder
 
 ## How to use server to open express server
