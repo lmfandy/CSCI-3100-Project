@@ -16,7 +16,7 @@ app.get('/', (req,res) => {
   res.sendFile(path.join(__dirname + './website/index.html'));
 });
 
-app.post('/CustomerSignUp' , (req, res) => {
+app.post('/customerSignUp' , (req, res) => {
   var data = req.body;
   const saltRounds = 10;
   bcrypt.hash(data.password, saltRounds).then(function (hash) {
