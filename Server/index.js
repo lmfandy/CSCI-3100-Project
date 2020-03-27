@@ -73,6 +73,24 @@ app.post('/customerSignUp' , (req, res) => {
   });
 });
 
+app.post('/ownerSignUp' , (req, res) => {
+  var data = req.body;
+  console.log(data);
+  const saltRounds = 10;
+  bcrypt.hash(data.password, saltRounds).then(function (hash) {
+    data.password = hash;
+    client.connect(err => {
+      const collection = client.db("PartyRoomBooking").collection("owner");
+      collection.insertOne(data, (err) => {
+        if (err) throw err;
+        console.log("Owner Signup Success!!!");
+        res.send("SignupSuccess");
+      });
+      // return res.redirect('/');
+    });
+  });
+});
+
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true});
 const connection = mongoose.connection;
 
