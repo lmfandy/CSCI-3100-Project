@@ -1,7 +1,7 @@
 $(function () {
   //store the pages to be toggled
   //add pages at the end of this array if needed
-  var pages = [$("#homePage"), $("#loginSignupPage"), $("#customerCreatePage"), $("#ownerCreatePage"),$("#signupSuccessPage")];
+  var pages = [$("#homePage"), $("#loginSignupPage"), $("#customerCreatePage"), $("#ownerCreatePage"), $("#signupSuccessPage")];
 
   //show the required page, hide all others
   //pages[0] is reserved for home page
@@ -20,74 +20,53 @@ $(function () {
   });
 
   $("#mainSearchBarCloseBtn").click(function () {
-     $("#mainSearchBar").slideUp("slow");;
+    $("#mainSearchBar").slideUp("slow");;
   });
-
 
   $("#searchBtn").click(function () {
     $("html").animate({ scrollTop: $(searchResult).offset().top }, 1000);
   });
 
-  $("#Signup_CustomerSubmitBtn").click(() => {
-    var $form = $("#customerSignupForm");
-    var username = $form.find('input[name="username"]').val();
-    var email = $form.find('input[name="email"]').val();
-    var password = $form.find('input[name="password"]').val();
-    var phone = $form.find('input[name="phone"]').val();
-    var customer = {
-      username: username,
-      email: email,
-      password: password,
-      phone: phone
-    }
-    console.log(customer);
+  $("#customerSignUpForm").submit(function(e) {
+    var form = $(this);
+    var url = form.attr('action');
     $.ajax({
       type: "POST",
       async: false,
-      data: customer,
-      url:"/CustomerSignUp"
+      data: form.serialize(),
+      url: url
     })
-    .done((res) => {
-      if (res == "SignupSuccess"){
-        togglePages(4);
-      }
-    })
-    .fail(function (jqXHR, textStatus, err) {
-      console.log(err);
-    });
+      .done((res) => {
+        alert(res);
+        if (res == "SignupSuccess") {
+          togglePages(4);
+        }
+      })
+      .fail(function (jqXHR, textStatus, err) {
+        alert(err);
+      });
+    e.preventDefault();
   });
-
-  $("#Signup_OwnerSubmitBtn").click(() => {
-    var $form = $("#ownerSignupForm");
-    var name = $form.find('input[name="name"]').val();
-    var username = $form.find('input[name="username"]').val();
-    var partyRoomName = $form.find('input[name="partyRoomName"]').val();
-    var email = $form.find('input[name="email"]').val();
-    var password = $form.find('input[name="password"]').val();
-    var phone = $form.find('input[name="phone"]').val();
-    var owner = {
-      name: name,
-      username: username,
-      partyRoomName: partyRoomName,
-      email: email,
-      password: password,
-      phone: phone
-    }
-    console.log(customer);
+  
+  $("#ownerSignUpForm").submit(function(e) {
+    var form = $(this);
+    var url = form.attr('action');
     $.ajax({
       type: "POST",
       async: false,
-      data: customer,
-      url:"/CustomerSignUp"
+      data: form.serialize(),
+      url: url
     })
-    .done((res) => {
-      if (res == "SignupSuccess"){
-        togglePages(4);
-      }
-    })
-    .fail(function (jqXHR, textStatus, err) {
-      console.log(err);
-    });
+      .done((res) => {
+        alert(res);
+        if (res == "SignupSuccess") {
+          togglePages(4);
+        }
+      })
+      .fail(function (jqXHR, textStatus, err) {
+        alert(err);
+      });
+    e.preventDefault();
   });
 });
 
