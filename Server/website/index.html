@@ -8,31 +8,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LetParty - Party Room Searching System</title>
 
-    <!-- Bootstrap -->
-    <link href="./css/bootstrap-4.4.1.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="./css/bootstrap-4.4.1.css" rel="stylesheet">
 
-    <link href="css/style.css" rel="stylesheet">
-    <!--jQuery-->
-    <script src="./js/jquery-3.4.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="./js/popper.min.js"></script>
-    <script src="./js/bootstrap-4.4.1.js"></script>
-    <script src="./js/script.js"></script>
-    <!--React-->
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/2.14.1/react-datepicker.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <link href="css/style.css" rel="stylesheet">
+  <!--jQuery-->
+  <script src="./js/jquery-3.4.1.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap-4.4.1.js"></script>
+  <script src="./js/script.js"></script>
+  <!--React-->
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script crossorigin
+    src="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/2.14.1/react-datepicker.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  </head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 
 <body>
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow-sm">
     <a class="navbar-brand mr-auto" href="index.html">LetParty</a>
     <button id="loginSignupBtn" type="button" class="btn btn-outline-primary my-2 my-sm-0">Login/Sign Up</button>
   </nav>
-
-
   <section id="homePage">
     <div id="mainSearchBar" style="display: none">
       <div class="float-right">
@@ -40,74 +39,78 @@
           <span aria-hidden="true" style="font-size: 40px">&times;</span>
         </button>
       </div>
-      <form class="p-3 mb-2 bg-light text-dark">
+      <form id="searchForm" class="p-3 mb-2 bg-light text-dark" action="/search">
         <div id="partyRoomNameField">
-          <input class="form-control" type="text" placeholder="Party Room Name" />
+          <input name="partyRoomName" class="form-control" type="text" placeholder="Party Room Name">
         </div>
         <div class="container mt-3">
           <div class="row mb-3">
             <div id="mainSearchBarCol" class="col-sm">
               <div class="form-inline">
                 <label>Date:&emsp;</label>
-                <input type="date" class="form-control">
+                <input name="date" type="date" class="form-control">
               </div>
               <div class="mt-3">
                 <div class="form-inline">
                   <label for="starttime">From:&emsp;</label>
-                  <div class="mainSearchBarTime"><input id="starttime" type="time" class="form-control"
-                      value="00:00:00"></div>
+                  <div class="mainSearchBarTime">
+                    <input id="starttime" name="starttime" type="time" class="form-control" value="00:00:00">
+                  </div>
                   <div id="mainSearchBarSpace">&emsp;</div>
                   <label for="endtime">to&emsp;</label>
-                  <div class="mainSearchBarTime"><input id="endtime" type="time" class="form-control" value="00:00:00">
+                  <div class="mainSearchBarTime">
+                    <input id="endtime" name="endtime" type="time" class="form-control" value="00:00:00">
                   </div>
                 </div>
               </div>
               <div class="mt-3 form-inline">
-                <label for="district">District:&emsp;</label>
-                <select id="district" class="form-control">
-                  <option value="shatin">Sha Tin</option>
-                  <option value="kwaitsing">Kwai Tsing</option>
-                  <option value="north">North</option>
-                  <option value="taipo">Tai Po</option>
-                  <option value="tsuenwan">Tsuen Wan</option>
-                  <option value="tuenmun">Tuen Mun</option>
-                  <option value="yuenlong">Yuen Long</option>
-                  <option value="kowlooncity">Kowloon City</option>
-                  <option value="kwuntong">Kwun Tong</option>
-                  <option value="shamshuipo">Sham Shui Po</option>
-                  <option value="wongtaisin">Wong Tai Sin</option>
-                  <option value="yautsimmong">Yau Tsim Mong</option>
-                  <option value="cw">Central/Western</option>
-                  <option value="east">Eastern</option>
-                  <option value="south">Southern</option>
-                  <option value="wanchai">Wan Chai</option>
-                </select>
+                <label>District:&emsp;
+                  <select name="district" class="form-control">
+                    <option value="shatin">Sha Tin</option>
+                    <option value="kwaitsing">Kwai Tsing</option>
+                    <option value="north">North</option>
+                    <option value="taipo">Tai Po</option>
+                    <option value="tsuenwan">Tsuen Wan</option>
+                    <option value="tuenmun">Tuen Mun</option>
+                    <option value="yuenlong">Yuen Long</option>
+                    <option value="kowlooncity">Kowloon City</option>
+                    <option value="kwuntong">Kwun Tong</option>
+                    <option value="shamshuipo">Sham Shui Po</option>
+                    <option value="wongtaisin">Wong Tai Sin</option>
+                    <option value="yautsimmong">Yau Tsim Mong</option>
+                    <option value="cw">Central/Western</option>
+                    <option value="east">Eastern</option>
+                    <option value="south">Southern</option>
+                    <option value="wanchai">Wan Chai</option>
+                  </select>
+                </label>
               </div>
             </div>
             <div class="col-sm">
               <div class="form-inline">
-                <label for="drea">Numbers of people:&emsp;</label>
-                <select id="drea" class="form-control">
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15above">15 or above</option>
-                </select>
+                <label>Number of people:&emsp;
+                  <select name="drea" class="form-control">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15above">15 or above</option>
+                  </select>
+                </label>
               </div>
               <div class="mt-3 form-inline">
-                <label for="priceRange">Price:&emsp;</label>
-                <input type="range" class="custom-range" min="0" max="5" step="0.5" id="priceRange">
-                <p id="priceValue"></p>
+                <p id="priceValue">Price: $50 / person</p>
+                <input id="priceRange" name="price" type="range" class="custom-range" min="20" max="120" step="10"
+                  value="50">
               </div>
             </div>
           </div>
@@ -116,23 +119,26 @@
               <label>Facilities requirment: </label>
               <div class="form-inline">
                 <div class="custom-control custom-checkbox mr-2">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1" value="ps4">
-                  <label class="custom-control-label" for="customCheck1">PS4</label>
+                  <label class="custom-control-label">PS4
+                    <input name="customCheck1" type="checkbox" class="custom-control-input" value="ps4">
+                  </label>
                 </div>
                 <div class="custom-control custom-checkbox mr-2">
-                  <input type="checkbox" class="custom-control-input" id="customCheck2" value="switch">
-                  <label class="custom-control-label" for="customCheck2">Switch</label>
+                  <label class="custom-control-label">Switch
+                    <input name="customCheck2" type="checkbox" class="custom-control-input" value="switch">
+                  </label>
                 </div>
                 <div class="custom-control custom-checkbox mr-2">
-                  <input type="checkbox" class="custom-control-input" id="customCheck3" value="mahjong">
-                  <label class="custom-control-label" for="customCheck3">Mahjong</label>
+                  <label class="custom-control-label">Mahjong
+                    <input name="customCheck3" type="checkbox" class="custom-control-input" value="mahjong">
+                  </label>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="mx-auto text-center">
-          <button id="searchBtn" type="button" class=" btn btn-primary my-2 my-sm-0">Search</button>
+          <button type="submit" class="btn btn-primary my-2 my-sm-0">Search</button>
         </div>
       </form>
     </div>
@@ -146,7 +152,7 @@
 
     <div class="container">
       <div class="row text-center">
-        <div class="col-lg-6 offset-lg-3">Description </div>
+        <div class="col-lg-6 offset-lg-3">Description</div>
       </div>
       <br id="searchResult">
       <hr>
@@ -246,7 +252,8 @@
               </div>
               <div class="form-group">
                 <div class="pr-5 form-check" style="display: inline-block">
-                  <input class="form-check-input" type="radio" name="userType" id="exampleRadios1" value="customer" checked>
+                  <input class="form-check-input" type="radio" name="userType" id="exampleRadios1" value="customer"
+                    checked>
                   <label class="form-check-label" for="customerLogin">Customer</label>
                 </div>
                 <div class="form-check" style="display: inline-block">
@@ -345,20 +352,20 @@
     </div>
   </section>
 
-<!-- <section id="signupSuccessPage" style="display: none" > -->
-<section id="signupSuccessPage" style="display: none">
-  <div class="jumbotron jumbotron-fluid text-center" style="padding-top: 100px">
+  <!-- <section id="signupSuccessPage" style="display: none" > -->
+  <section id="signupSuccessPage" style="display: none">
+    <div class="jumbotron jumbotron-fluid text-center" style="padding-top: 100px">
       <span class="material-icons">check_circle</span>
       <p>Sign Up Success!</p>
-  </div>
-</section>
-<div class="container">
-  <div class="row">
-    <div class="text-center col-lg-6 offset-lg-3">
-      <h4>Party Room Online Booking </h4>
-      <p>Copyright &copy; 2019 &middot; All Rights Reserved &middot; <a href="#" >My Website</a></p>
     </div>
-  </div>
+  </section>
+  <div class="container">
+    <div class="row">
+      <div class="text-center col-lg-6 offset-lg-3">
+        <h4>Party Room Online Booking </h4>
+        <p>Copyright &copy; 2019 &middot; All Rights Reserved &middot; <a href="#">My Website</a></p>
+      </div>
+    </div>
 </body>
 
 </html>
