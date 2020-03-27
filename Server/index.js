@@ -55,14 +55,15 @@ router.get('/login', function(req, res) {
   res.sendfile('login.html', {'root': "./website"});
 });
 
-app.post('/CustomerSignUp' , (req, res) => {
+app.post('/customerSignUp' , (req, res) => {
   var data = req.body;
+  console.log(data);
   const saltRounds = 10;
   bcrypt.hash(data.password, saltRounds).then(function (hash) {
     data.password = hash;
     client.connect(err => {
       const collection = client.db("PartyRoomBooking").collection("customer");
-      collection.insert(data);
+      collection.insertOne(data);
       console.log("Customer Signup Success!!!");
       return res.redirect('/');
     });

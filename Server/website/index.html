@@ -232,13 +232,12 @@
         <!-- Content Panel -->
         <div id="clothingnavcontent1" class="tab-content">
           <div role="tabpanel" class="tab-pane fade show active" id="home1" aria-labelledby="hometab1">
-            <form action="login" onsubmit="return login(this);">
+            <form id="loginForm" action="/login">
               <div class="form-group">
                 <br>
                 <label>Username
-                  <input name="username" type="text" class="form-control" placeholder="Enter email">
+                  <input name="username" type="text" class="form-control" placeholder="Username">
                 </label>
-                <small class="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
               <div class="form-group">
                 <label>Password
@@ -267,7 +266,7 @@
     <div class="container" style="padding-top: 100px">
       <h1>Create customer</h1>
       <hr>
-      <form action="customerSignUp" onsubmit="return customerSignUp(this);">
+      <form id="customerSignUpForm" action="/customerSignUp">
         <div class="form-group">
           <label>Username
             <input name="username" type="text" class="form-control" placeholder="Enter username">
@@ -279,7 +278,6 @@
           </label>
           <small class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-        
         <div class="form-group">
           <label>Password
             <input name="password" type="password" class="form-control" placeholder="Password">
@@ -299,7 +297,7 @@
     <div class="container " style="padding-top: 100px">
       <h1>Party Room Owner Register</h1>
       <hr>
-      <form action="ownerSignUp" onsubmit="return ownerSignUp(this);">
+      <form id="ownerSignUpForm" action="/ownerSignUp">
         <div class="form-group">
           <label>Owner's name
             <input name="name" type="text" class="form-control" placeholder="Enter owner's name">
