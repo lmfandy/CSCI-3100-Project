@@ -47,15 +47,43 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
-router.get('/', function(req, res) {
-  res.sendfile('index.html', {'root': "./website"});
+router.get('/', function (req, res) {
+  res.sendFile('index.html', { 'root': "./website" });
 });
 
-router.get('/login', function(req, res) {
-  res.sendfile('login.html', {'root': "./website"});
+// router.get('/login', function (req, res) {
+//   res.sendFile('login.html', { 'root': "./website" });
+// });
+
+app.get('/search', (req, res) => {
+  var data = req.query;
+  console.log(data);
+  client.connect(err => {
+    // const collection = client.db("PartyRoomBooking").collection("customer");
+    // collection.insertOne(data, (err) => {
+    //   if (err) throw err;
+    //   console.log("Customer Signup Success!!!");
+    //   res.send("SignupSuccess");
+    // });
+    // return res.redirect('/');
+    console.log("Search Success!!!");
+    res.send("SearchSuccess");
+  });
 });
 
-app.post('/customerSignUp' , (req, res) => {
+app.post('/login', (req, res) => {
+  var data = req.body;
+  console.log(data);
+  client.connect(err => {
+    console.log(data.userType, data.username, "Login Success!!!");
+    if (data.userType == "customer")
+      res.send("CustomerLoginSuccess");
+    else if (data.userType == "owner")
+      res.send("OwnerLoginSuccess");
+  });
+});
+
+app.post('/customerSignUp', (req, res) => {
   var data = req.body;
   console.log(data);
   const saltRounds = 10;
@@ -73,7 +101,7 @@ app.post('/customerSignUp' , (req, res) => {
   });
 });
 
-app.post('/ownerSignUp' , (req, res) => {
+app.post('/ownerSignUp', (req, res) => {
   var data = req.body;
   console.log(data);
   const saltRounds = 10;
@@ -91,7 +119,7 @@ app.post('/ownerSignUp' , (req, res) => {
   });
 });
 
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true,  useUnifiedTopology: true});
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 
 connection.once('open', () => {

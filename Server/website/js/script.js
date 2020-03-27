@@ -15,19 +15,34 @@ $(function () {
   $("#createCustomerBtn").click(() => togglePages(2));
   $("#createOwnerBtn").click(() => togglePages(3));
 
-  $("#searchNowBtn").click(function () {
-    $("#mainSearchBar").slideDown("slow");
+  $("#searchNowBtn").click(() => $("#mainSearchBar").slideDown("slow"));
+
+  $("#mainSearchBarCloseBtn").click(() => $("#mainSearchBar").slideUp("slow"));
+
+  $("#priceRange").on("input", () => $("#priceValue").html("Price: $" + $("#priceRange").val() + " / person"));
+
+  $("#searchForm").submit(function (e) {
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+      type: "GET",
+      async: false,
+      data: form.serialize(),
+      url: url
+    })
+      .done(res => {
+        alert(res);
+        if (res == "SearchSuccess") {
+          $("html").animate({ scrollTop: $(searchResult).offset().top }, 600);
+        }
+      })
+      .fail((jqXHR, textStatus, err) => {
+        alert(err);
+      });
+    e.preventDefault();
   });
 
-  $("#mainSearchBarCloseBtn").click(function () {
-    $("#mainSearchBar").slideUp("slow");;
-  });
-
-  $("#searchBtn").click(function () {
-    $("html").animate({ scrollTop: $(searchResult).offset().top }, 1000);
-  });
-
-  $("#customerSignUpForm").submit(function(e) {
+  $("#loginForm").submit(function (e) {
     var form = $(this);
     var url = form.attr('action');
     $.ajax({
@@ -36,21 +51,43 @@ $(function () {
       data: form.serialize(),
       url: url
     })
-      .done((res) => {
+      .done(res => {
+        alert("LoginSuccess");
+        if (res =="CustomerLoginSuccess")
+          window.location.href = "customer_info.html";
+        else if (res =="OwnerLoginSuccess")
+          window.location.href = "owner_info.html";
+      })
+      .fail((jqXHR, textStatus, err) => {
+        alert(err);
+      });
+    e.preventDefault();
+  });
+
+  $("#customerSignUpForm").submit(function (e) {
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+      type: "POST",
+      async: false,
+      data: form.serialize(),
+      url: url
+    })
+      .done(res => {
         alert(res);
         if (res == "SignupSuccess") {
           togglePages(4);
         }
         form[0].reset();
       })
-      .fail(function (jqXHR, textStatus, err) {
+      .fail((jqXHR, textStatus, err) => {
         alert(err);
         form[0].reset();
       });
     e.preventDefault();
   });
 
-  $("#ownerSignUpForm").submit(function(e) {
+  $("#ownerSignUpForm").submit(function (e) {
     var form = $(this);
     var url = form.attr('action');
     $.ajax({
@@ -59,42 +96,17 @@ $(function () {
       data: form.serialize(),
       url: url
     })
-      .done((res) => {
+      .done(res => {
         alert(res);
         if (res == "SignupSuccess") {
           togglePages(4);
         }
         form[0].reset();
       })
-      .fail(function (jqXHR, textStatus, err) {
+      .fail((jqXHR, textStatus, err) => {
         alert(err);
         form[0].reset();
       });
     e.preventDefault();
   });
 });
-
-function login(data) {
-  //this is just a sample function.
-  //we will not check the login info using this simple approach.
-  var username = data.username.value;
-  var password = data.password.value;
-  switch (username) {
-    case "customer":
-      if (password == "123456")
-        window.location.href = "customer_info.html";
-      else
-        alert("ERROR: Incorrect password. Try again.");
-      break;
-    case "owner":
-      if (password == "qwerty")
-        window.location.href = "owner_info.html";
-      else
-        alert("ERROR: Incorrect password. Try again.");
-      break;
-    default:
-      alert("ERROR: The email is not registered. Try again.");
-      break;
-  }
-  return false;
-}
