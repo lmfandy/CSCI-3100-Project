@@ -78,9 +78,11 @@ $(function () {
         if (res == "SignupSuccess") {
           togglePages(4);
         }
+        form[0].reset();
       })
       .fail((jqXHR, textStatus, err) => {
         alert(err);
+        form[0].reset();
       });
     e.preventDefault();
   });
@@ -99,9 +101,11 @@ $(function () {
         if (res == "SignupSuccess") {
           togglePages(4);
         }
+        form[0].reset();
       })
       .fail((jqXHR, textStatus, err) => {
         alert(err);
+        form[0].reset();
       });
     e.preventDefault();
   });
