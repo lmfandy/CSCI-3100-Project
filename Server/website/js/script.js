@@ -27,17 +27,51 @@ $(function () {
   $("#searchBtn").click(function () {
     $("html").animate({ scrollTop: $(searchResult).offset().top }, 1000);
   });
-  
+
   $("#Signup_CustomerSubmitBtn").click(() => {
-    var username = document.getElementById("Signup_CustomerUsername").value;
-    var email = document.getElementById("Signup_CustomerEmail").value;
-    var password = document.getElementById("Signup_CustomerPassword").value;
-    var phone = document.getElementById("Signup_CustomerPhone").value;
+    var $form = $("#customerSignupForm");
+    var username = $form.find('input[name="username"]').val();
+    var email = $form.find('input[name="email"]').val();
+    var password = $form.find('input[name="password"]').val();
+    var phone = $form.find('input[name="phone"]').val();
     var customer = {
-      "username": username,
-      "email": email,
-      "password": password,
-      "phone": phone
+      username: username,
+      email: email,
+      password: password,
+      phone: phone
+    }
+    console.log(customer);
+    $.ajax({
+      type: "POST",
+      async: false,
+      data: customer,
+      url:"/CustomerSignUp"
+    })
+    .done((res) => {
+      if (res == "SignupSuccess"){
+        togglePages(4);
+      }
+    })
+    .fail(function (jqXHR, textStatus, err) {
+      console.log(err);
+    });
+  });
+
+  $("#Signup_OwnerSubmitBtn").click(() => {
+    var $form = $("#ownerSignupForm");
+    var name = $form.find('input[name="name"]').val();
+    var username = $form.find('input[name="username"]').val();
+    var partyRoomName = $form.find('input[name="partyRoomName"]').val();
+    var email = $form.find('input[name="email"]').val();
+    var password = $form.find('input[name="password"]').val();
+    var phone = $form.find('input[name="phone"]').val();
+    var owner = {
+      name: name,
+      username: username,
+      partyRoomName: partyRoomName,
+      email: email,
+      password: password,
+      phone: phone
     }
     console.log(customer);
     $.ajax({
@@ -80,50 +114,4 @@ function login(data) {
       break;
   }
   return false;
-}
-
-function customerSignUp(data) {
-  var username = data.username.value;
-  var email = data.email.value;
-  var password = data.password.value;
-  var phone = data.phone.value;
-  var customer = {
-    "username": username,
-    "email": email,
-    "password": password,
-    "phone": phone
-  }
-  console.log(customer);
-  $.ajax({
-    type: "POST",
-    async: false,
-    dataType: "json",
-    data: customer,
-    url: "/CustomerSignUp"
-  });
-}
-
-function ownerSignUp(data) {
-  var name = data.name.value;
-  var username = data.username.value;
-  var partyRoomName = data.partyRoomName.value;
-  var email = data.email.value;
-  var password = data.password.value;
-  var phone = data.phone.value;
-  var owner = {
-    "name": name,
-    "username": username,
-    "partyRoomName": partyRoomName,
-    "email": email,
-    "password": password,
-    "phone": phone
-  }
-  console.log(owner);
-  $.ajax({
-    type: "POST",
-    async: false,
-    dataType: "json",
-    data: owner,
-    url: "/OwnerSignUp"
-  });
 }

@@ -62,9 +62,12 @@ app.post('/CustomerSignUp' , (req, res) => {
     data.password = hash;
     client.connect(err => {
       const collection = client.db("PartyRoomBooking").collection("customer");
-      collection.insert(data);
-      console.log("Customer Signup Success!!!");
-      return res.redirect('/');
+      collection.insertOne(data, (err) => {
+        if (err) throw err;
+        console.log("Customer Signup Success!!!");
+        res.send("SignupSuccess");
+      });
+      // return res.redirect('/');
     });
   });
 });
