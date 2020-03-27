@@ -47,6 +47,27 @@ $(function () {
       });
     e.preventDefault();
   });
+  
+  $("#ownerSignUpForm").submit(function(e) {
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+      type: "POST",
+      async: false,
+      data: form.serialize(),
+      url: url
+    })
+      .done((res) => {
+        alert(res);
+        if (res == "SignupSuccess") {
+          togglePages(4);
+        }
+      })
+      .fail(function (jqXHR, textStatus, err) {
+        alert(err);
+      });
+    e.preventDefault();
+  });
 });
 
 function login(data) {
