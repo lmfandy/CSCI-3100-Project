@@ -17,26 +17,6 @@ app.use(express.static('website'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname + './website/index.html'));
-});
-
-app.post('/customerSignUp' , (req, res) => {
-  var data = req.body;
-  const saltRounds = 10;
-  bcrypt.hash(data.password, saltRounds).then(function (hash) {
-    data.password = hash;
-    client.connect(err => {
-      const collection = client.db("PartyRoomBooking").collection("customer");
-      collection.insertOne(data, (err) => {
-        if (err) throw err;
-        console.log("Customer Signup Success!!!");
-        res.send("SignupSuccess");
-      });
-    });
-  });
-});
-
 // app.get('/', (req,res) => {
 //   res.sendFile(path.join(__dirname + 'hello-react-app/public/index.html'));
 // });
