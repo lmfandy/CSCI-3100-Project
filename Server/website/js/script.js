@@ -41,13 +41,15 @@ $(function () {
         if (res == "SignupSuccess") {
           togglePages(4);
         }
+        form[0].reset();
       })
       .fail(function (jqXHR, textStatus, err) {
         alert(err);
+        form[0].reset();
       });
     e.preventDefault();
   });
-  
+
   $("#ownerSignUpForm").submit(function(e) {
     var form = $(this);
     var url = form.attr('action');
@@ -62,9 +64,11 @@ $(function () {
         if (res == "SignupSuccess") {
           togglePages(4);
         }
+        form[0].reset();
       })
       .fail(function (jqXHR, textStatus, err) {
         alert(err);
+        form[0].reset();
       });
     e.preventDefault();
   });
