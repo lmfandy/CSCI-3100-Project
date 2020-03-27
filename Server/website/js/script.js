@@ -1,11 +1,11 @@
 $(function () {
   //store the pages to be toggled
   //add pages at the end of this array if needed
-  var pages = [$("#homePage"), $("#loginSignupPage"), $("#customerCreatePage"), $("#ownerCreatePage")]
+  var pages = [$("#homePage"), $("#loginSignupPage"), $("#customerCreatePage"), $("#ownerCreatePage"),$("#signupSuccessPage")];
 
   //show the required page, hide all others
   //pages[0] is reserved for home page
-  //so index should be >= 1
+  // so index should be >= 1
   function togglePages(index) {
     pages.forEach((p, i) => (i == index) ? p.show() : p.hide());
   }
@@ -20,23 +20,41 @@ $(function () {
   });
 
   $("#mainSearchBarCloseBtn").click(function () {
-    $("#mainSearchBar").slideUp("slow");;
+     $("#mainSearchBar").slideUp("slow");;
   });
+
 
   $("#searchBtn").click(function () {
     $("html").animate({ scrollTop: $(searchResult).offset().top }, 1000);
   });
-});
-
-$(function () {
-  var range = document.getElementById("priceRange");
-  var output = document.getElementById("priceValue");
-  output.innerHTML = "Each price / hr: $" + (range.value * (20) + 20); // Display the default slider value
-
-  // Update the current slider value (each time you drag the slider handle)
-  range.oninput = function () {
-    output.innerHTML = "Each price / hr: $" + (this.value * (20) + 20);
-  }
+  
+  $("#Signup_CustomerSubmitBtn").click(() => {
+    var username = document.getElementById("Signup_CustomerUsername").value;
+    var email = document.getElementById("Signup_CustomerEmail").value;
+    var password = document.getElementById("Signup_CustomerPassword").value;
+    var phone = document.getElementById("Signup_CustomerPhone").value;
+    var customer = {
+      "username": username,
+      "email": email,
+      "password": password,
+      "phone": phone
+    }
+    console.log(customer);
+    $.ajax({
+      type: "POST",
+      async: false,
+      data: customer,
+      url:"/CustomerSignUp"
+    })
+    .done((res) => {
+      if (res == "SignupSuccess"){
+        togglePages(4);
+      }
+    })
+    .fail(function (jqXHR, textStatus, err) {
+      console.log(err);
+    });
+  });
 });
 
 function login(data) {

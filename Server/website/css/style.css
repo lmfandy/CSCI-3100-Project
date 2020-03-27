@@ -97,3 +97,13 @@ nav {
     padding: 20px 20px 0px 20px;
   }
 }
+
+#signupSuccessPage span {
+  font-size: 100px;
+  color: #44c918;
+}
+
+#signupSuccessPage p {
+  font-size: 30px;
+  color: #44c918;
+}

@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LetParty - Party Room Searching System</title>
 
-  <!-- Bootstrap -->
-  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="./css/bootstrap-4.4.1.css" rel="stylesheet">
 
-  <link href="./css/style.css" rel="stylesheet">
-  <!--jQuery-->
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap-4.4.1.js"></script>
-  <script src="./js/script.js"></script>
-  <!--React-->
-  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-  <script crossorigin
-    src="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/2.14.1/react-datepicker.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-</head>
+    <link href="./css/style.css" rel="stylesheet">
+    <!--jQuery-->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap-4.4.1.js"></script>
+    <script src="./js/script.js"></script>
+    <!--React-->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/2.14.1/react-datepicker.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
 
 <body>
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -277,6 +279,7 @@
           </label>
           <small class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
+        
         <div class="form-group">
           <label>Password
             <input name="password" type="password" class="form-control" placeholder="Password">
@@ -338,12 +341,19 @@
       </form>
     </div>
   </section>
-  <div class="container">
-    <div class="row">
-      <div class="text-center col-lg-6 offset-lg-3">
-        <h4>Party Room Online Booking </h4>
-        <p>Copyright &copy; 2019 &middot; All Rights Reserved &middot; <a href="#">My Website</a></p>
-      </div>
+  
+<!-- <section id="signupSuccessPage" style="display: none" > -->
+<section id="signupSuccessPage" style="display: none">
+  <div class="jumbotron jumbotron-fluid text-center" style="padding-top: 100px">
+      <span class="material-icons">check_circle</span>
+      <p>Sign Up Success!</p>
+  </div>
+</section>
+<div class="container">
+  <div class="row">
+    <div class="text-center col-lg-6 offset-lg-3">
+      <h4>Party Room Online Booking </h4>
+      <p>Copyright &copy; 2019 &middot; All Rights Reserved &middot; <a href="#" >My Website</a></p>
     </div>
   </div>
 </body>
