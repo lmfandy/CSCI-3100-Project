@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LetParty - Party Room Searching System</title>
+
+  <!-- Bootstrap -->
+  <link href="./css/bootstrap-4.4.1.css" rel="stylesheet">
+
+  <link href="./css/customerSignup.css" rel="stylesheet">
+  <!--jQuery-->
+  <script src="./js/jquery-3.4.1.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap-4.4.1.js"></script>
+  <script src="./js/customerSignup.js"></script>
+
+  <!-- Icon -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow-sm">
+    <a class="navbar-brand mr-auto" href="index.html">LetParty</a>
+    <form action="/loginSignup" method="get"><input id="loginSignupBtn" type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Login / Sign Up"></form>
+  </nav>
+  <section id="customerCreatePage">
+    <div class="container" style="padding-top: 100px">
+      <h1>Create customer</h1>
+      <hr>
+      <form id="customerSignUpForm" action="/customerSignup/signup" method="post">
+        <div class="form-group">
+          <label>Username
+            <input name="username" type="text" class="form-control" placeholder="Enter username">
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Email address
+            <input name="email" type="email" class="form-control" placeholder="Enter email">
+          </label>
+          <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label>Password
+            <input name="password" type="password" class="form-control" placeholder="Password">
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Phone Number
+            <input name="phone" type="text" class="form-control" placeholder="Phone Number">
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-primary">Reset</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="signupSuccessPage" style="display: none">
+    <div class="jumbotron jumbotron-fluid text-center" style="padding-top: 100px">
+      <span class="material-icons">check_circle</span>
+      <p>Sign Up Success!</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <hr>
+    <div class="row">
+      <div class="text-center col-lg-6 offset-lg-3">
+        <h5>Party Room Online Booking </h5>
+        <p>Copyright &copy; 2020 &middot; All Rights Reserved &middot; CSCI3100 Group08</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
