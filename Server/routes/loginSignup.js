@@ -14,7 +14,7 @@ router.post('/login', (req, res) => {
   var data = req.body;
   console.log(data);
   client.connect(err => {
-    collection.findOne()
+    collection.findOne();
     console.log(data.userType, data.username, "Login Success!!!");
     if (data.userType == "customer")
       res.send("CustomerLoginSuccess");
