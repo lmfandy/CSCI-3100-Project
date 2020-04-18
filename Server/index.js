@@ -11,14 +11,27 @@ const bodyParser = require("body-parser");
 const bcrypt = require('bcrypt');
 const app = express();
 const router = express.Router();
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+var path = require('path');
 
-app.use(express.static('website'));
+// app.use(express.static('website'));
+// app.use(express.static('website/js'));
+// app.use('/website',express.static('images'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(cors());
 app.use(express.json());
+
+app.use(session({
+  secret: 'csci3100',
+  store: new MongoStore({url: 'mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/sessiondb?retryWrites=true&w=majority'}),
+  cookie: { maxAge: 60 * 1000 },
+  saveUninitialized: false,
+  resave: false
+}));
 
 // Check MongoDB Connection
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
@@ -30,8 +43,20 @@ connection.once('open', () => {
 
 // For Index page
 app.get('/', function (req, res) {
-  res.sendFile('index.html', { 'root': "./website" });
+  res.sendFile(path.join(__dirname + '/website/index.html'));
 });
+app.use(express.static('website'));
+
+app.post('/checkLogin', function (req, res) {
+  var user = 'guest';
+  var isLogined = false;
+  if (!(req.session.loginUser == undefined)){
+    user = req.session.loginUser;
+    isLogined = true;
+  }
+  res.send({user: user, isLogined: isLogined});
+});
+
 
 app.get('/search', (req, res) => {
   var data = req.query;

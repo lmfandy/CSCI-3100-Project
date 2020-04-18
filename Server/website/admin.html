@@ -42,17 +42,13 @@
                         <i class="fa fa-user-circle-o mr-2"></i>
                         <span class="font-weight-bold small text-uppercase">Inbox</span></a>
 
-                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-bookings-tab" data-toggle="pill" href="#v-pills-bookings" role="tab" aria-controls="v-pills-bookins" aria-selected="false">
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-application-tab" data-toggle="pill" href="#v-pills-application" role="tab" aria-controls="v-pills-application" aria-selected="false">
                         <i class="fa fa-calendar-minus-o mr-2"></i>
-                        <span class="font-weight-bold small text-uppercase">Bookings</span></a>
+                        <span class="font-weight-bold small text-uppercase">application</span></a>
 
-                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-roomlist-tab" data-toggle="pill" href="#v-pills-roomlist" role="tab" aria-controls="v-pills-contacts" aria-selected="false">
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-report-tab" data-toggle="pill" href="#v-pills-report" role="tab" aria-controls="v-pills-report" aria-selected="false">
                         <i class="fa fa-star mr-2"></i>
-                        <span class="font-weight-bold small text-uppercase">Room List</span></a>
-
-                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
-                        <i class="fa fa-check mr-2"></i>
-                        <span class="font-weight-bold small text-uppercase">Personal information</span></a>
+                        <span class="font-weight-bold small text-uppercase">reports</span></a>
                     </div>
             </div>
 
@@ -90,33 +86,30 @@
   							</table></p>
 						          </div>
                     </div>
-                    <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-bookings" role="tabpanel" aria-labelledby="v-pills-bookings-tab">
+                    <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-application" role="tabpanel" aria-labelledby="v-pills-application-tab">
 						<div class="table-responsive">
                         <table class="table table-hover">
                         <thead>
                           <tr>
-                            <th>Booking id</th>
-                            <th>Customer Name</th>
-                            <th>Party Room Owner Name</th>
-                            <th>Booking Date</th>
-                            <th>Booking Time</th>
+                            <th>Application id</th>
+                            <th>Owner Account Nmae</th>
+                            <th>Party Room Name</th>
+                            <th>Location</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                             <td>0000137</td>
-                            <td>Shao Zili</td>
-                            <td>Hello Party</td>
-                            <td>5 May 2020</td>
-                            <td>19:00 - 26:00</td>
+                            <td>silly</td>
+                            <td>Shao Zili 's Hell'</td>
+                            <td>Hell</td>
                             <td><button id="ViewBtn3" class="btn btn-outline-primary my-2 my-sm-0" type="button">View</button></td>
                           </tr>
                           <tr>
                             <td>0000139</td>
                             <td>Handsome Michael</td>
                             <td>Hello Party</td>
-                            <td>6 May 2020</td>
                             <td>13:00 - 20:00</td>
                             <td><button id="ViewBtn4" class="btn btn-outline-primary my-2 my-sm-0" type="button">View</button></td>
                           </tr>
@@ -124,7 +117,6 @@
                             <td>0000140</td>
                             <td>Handsome Michael</td>
                             <td>Pixel Party</td>
-                            <td>30 Apr 2020</td>
                             <td>15:00 - 20:00</td>
                             <td><button id="ViewBtn5" class="btn btn-outline-primary my-2 my-sm-0" type="button">View</button></td>
                           </tr>
@@ -133,29 +125,21 @@
                       </div>
       				</div>
 
-                    <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-roomlist" role="tabpanel" aria-labelledby="v-pills-roomlist-tab">
+                    <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report-tab">
                       <div class="card col-md-4"> <img class="card-img-top" src="images/card-img.png" alt="Card image cap">
                           <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             <a href="#" class="btn btn-primary">Go somewhere</a> </div>
                       </div>
-					                      </div>
+					 </div>
 
-                    <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                        <h4 class="font-italic mb-4">Personal information</h4>
-                        <p class="font-italic text-muted mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-  <div class="tab-pane fade show active" id="searchBooking" role="tabpanel" aria-labelledby="contact-tab">
-  <h2>Search booking by ID</h2>
-  <div class="booking-id">
-	    <input type="number" class="form-control" id="partyroomsearchid" placeholder="Enter name of party room"></div>
-  </div>
+
 </div>
 </div>
     <!-- /.col-md-8 -->

@@ -8,8 +8,6 @@ const mongoose = require('mongoose');
 
 const bodyParser = require("body-parser");
 const bcrypt = require('bcrypt');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
 
 router.get('/', function (req, res) {
   res.sendFile('loginSignup.html', { 'root': "./website" });
@@ -17,7 +15,7 @@ router.get('/', function (req, res) {
 
 router.post('/login', (req, res) => {
   var data = req.body;
-  console.log(data);
+  console.log(req.body);
   client.connect(err => {
     if (data.userType == "customer"){
       const cusColl = client.db("PartyRoomBooking").collection("customer");
@@ -29,7 +27,15 @@ router.post('/login', (req, res) => {
         else {
           // Check whether the password correct
           bcrypt.compare(data.password, customer.password, (err, result) => {
-            if(result == true) res.send("CustomerLoginSuccess");
+            if(result == true) {
+              req.session.regenerate(function(err) {
+                if(err){
+                  res.send("Login Fail");
+                }
+                req.session.loginUser = data.username;
+                res.send("CustomerLoginSuccess");
+              });
+            }
             else {
               res.send("Password Not Correct");
             }
