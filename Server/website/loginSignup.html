@@ -27,20 +27,22 @@
 
   <section id="loginSignupPage">
     <div class="jumbotron jumbotron-fluid text-center" style="padding-top: 100px">
-      <h1 class="display-4">Login / Signup&nbsp; &nbsp;</h1>
+      <h1 class="display-4">LetParty</h1>
       <br>
       <div class="container">
+        <div>
         <ul id="clothingnav1" class="nav nav-tabs" role="tablist">
-          <li class="nav-item"> <a class="nav-link active" href="#home1" id="hometab1" role="tab" data-toggle="tab"
+          <li class="nav-item" style="width: 50%"> <a class="nav-link active" href="#home1" id="hometab1" role="tab" data-toggle="tab"
               aria-controls="home" aria-expanded="true">Login</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#paneTwo1" role="tab" id="hatstab1" data-toggle="tab"
+          <li class="nav-item" style="width: 50%"> <a class="nav-link" href="#paneTwo1" role="tab" id="hatstab1" data-toggle="tab"
               aria-controls="hats">Sign Up</a> </li>
         </ul>
+        </div>
         <!-- Content Panel -->
         <div class="tab-content">
           <!-- Login Tab -->
           <div role="tabpanel" class="tab-pane fade show active" id="home1" aria-labelledby="hometab1">
-            <form id="loginForm" action="/loginSignup/login" method="'post'">
+            <form id="loginForm" action="/loginSignup/login" method="post">
               <div class="form-group">
                 <br>
                 <label>Username

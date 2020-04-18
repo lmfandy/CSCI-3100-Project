@@ -6,6 +6,11 @@ const uri = "mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/test?re
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const mongoose = require('mongoose');
 
+const bodyParser = require("body-parser");
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
 router.get('/', function (req, res) {
   res.sendFile('loginSignup.html', { 'root': "./website" });
 });
@@ -14,12 +19,52 @@ router.post('/login', (req, res) => {
   var data = req.body;
   console.log(data);
   client.connect(err => {
-    collection.findOne()
-    console.log(data.userType, data.username, "Login Success!!!");
-    if (data.userType == "customer")
-      res.send("CustomerLoginSuccess");
-    else if (data.userType == "owner")
-      res.send("OwnerLoginSuccess");
+    if (data.userType == "customer"){
+      const cusColl = client.db("PartyRoomBooking").collection("customer");
+      cusColl.findOne({username:  data.username},  {password: 1}, (err, customer) => {
+        // Check whether the username exist
+        if (customer == null){
+          res.send("Username Not Found");
+        }
+        else {
+          // Check whether the password correct
+          bcrypt.compare(data.password, customer.password, (err, result) => {
+            if(result == true) res.send("CustomerLoginSuccess");
+            else {
+              res.send("Password Not Correct");
+            }
+          });
+        }
+      });
+    }
+    else if (data.userType == "owner"){
+      const ownerColl = client.db("PartyRoomBooking").collection("owner");
+      ownerColl.findOne({username:  data.username},  {password: 1}, (err, owner) => {
+        // Check whether the username exist
+        if (owner == null){
+          res.send("Username Not Found");
+        }
+        else {
+          // Check whether the password correct
+          bcrypt.compare(data.password, owner.password, (err, result) => {
+            if(result == true) res.send("OwnerLoginSuccess");
+            else {
+              res.send("Password Not Correct");
+            }
+          });
+        }
+      });
+    }
+    // const cusColl = client.db("PartyRoomBooking").connection("customer");
+    // const ownerColl = client.db("PartyRoomBooking").connection("owner");
+    // cusColl.findOne({})
+
+
+    // console.log(data.userType, data.username, "Login Success!!!");
+    // if (data.userType == "customer")
+    //   res.send("CustomerLoginSuccess");
+    // else if (data.userType == "owner")
+    //   res.send("OwnerLoginSuccess");
   });
 });
 

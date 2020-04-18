@@ -9,7 +9,7 @@ $(function () {
       url: url
     })
       .done(res => {
-        alert("LoginSuccess");
+        alert(res);
         if (res =="CustomerLoginSuccess")
           window.location.href = "customer_info.html";
         else if (res =="OwnerLoginSuccess")
