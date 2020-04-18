@@ -1,5 +1,5 @@
 nav {
-  z-index: 3;
+  z-index: 4;
 }
 #userIcon{
   text-align: center;
@@ -11,6 +11,11 @@ nav {
   background-color: #429ef5;
   color: white;
 }
+
+#userIcon:hover{
+  filter: brightness(1.15);
+}
+
 
 #mainSearchBar {
   background-color: white;
@@ -68,4 +73,23 @@ nav {
   #partyRoomNameField {
     padding: 20px 20px 0px 20px;
   }
+}
+
+#sideBar {
+  padding-top: 70px;
+  width: 200px;
+  height: 100%;
+  right: 0;
+  position: absolute;
+  z-index: 3;
+  background-color: white;
+}
+
+#sideBar > ul{
+   list-style: none;
+   padding-left: 0;
+}
+
+.sideItem{
+  padding: 10px 10px 10px 40px;
 }

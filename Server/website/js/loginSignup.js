@@ -1,4 +1,20 @@
 $(function () {
+  $.ajax({
+    type: "post",
+    async: false,
+    url: "/checkLogin"
+  })
+  .done(res => {
+    if(res.isLogined == true){
+      window.location.href = "/";
+    }
+  })
+  .fail((jqXHR, textStatus, err) => {
+    alert(err);
+  });
+});
+
+$(function () {
   $("#loginForm").submit(function (e) {
     var form = $(this);
     var url = form.attr('action');

@@ -5,8 +5,7 @@ $(function () {
     url: "/checkLogin"
   })
   .done(res => {
-    console.log(res);
-    if(res.user != 'guest'){
+    if(res.isLogined == true){
       $('#loginSignupForm').hide();
       $('#userIcon').show();
       $('#userIcon').append(res.user.toUpperCase().charAt(0));
@@ -17,23 +16,33 @@ $(function () {
   });
 });
 
+// sideBar Show
 $(function () {
-  //store the pages to be toggled
-  //add pages at the end of this array if needed
-  // var pages = [$("#homePage"), $("#loginSignupPage"), $("#customerCreatePage"), $("#ownerCreatePage"), $("#signupSuccessPage")];
+  $('#userIcon').click(() => {
+    $("#sideBar").animate({
+      width: "toggle"
+    });
+  });
+});
 
-  //show the required page, hide all others
-  //pages[0] is reserved for home page
-  // so index should be >= 1
-  // function togglePages(index) {
-  //   pages.forEach((p, i) => (i == index) ? p.show() : p.hide());
-  // }
+$(function () {
+  $('#logoutBtn').click(() => {
+    $.ajax({
+      type: "post",
+      async: false,
+      url: "/logout"
+    })
+    .done(res => {
+      window.location.href = "/";
+    })
+    .fail((jqXHR, textStatus, err) => {
+      alert(err);
+    });
+  });
+});
 
-  //toggle to the page depending button clicked
-  // $("#loginSignupBtn").click(() => togglePages(1));
-  // $("#createCustomerBtn").click(() => togglePages(2));
-  // $("#createOwnerBtn").click(() => togglePages(3));
 
+$(function () {
   $("#searchNowBtn").click(() => $("#mainSearchBar").slideDown("slow"));
 
   $("#mainSearchBarCloseBtn").click(() => $("#mainSearchBar").slideUp("slow"));

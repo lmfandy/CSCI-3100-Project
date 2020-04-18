@@ -47,7 +47,7 @@ app.get('/', function (req, res) {
 });
 app.use(express.static('website'));
 
-app.post('/checkLogin', function (req, res) {
+app.post('/checkLogin', (req, res) => {
   var user = 'guest';
   var isLogined = false;
   if (!(req.session.loginUser == undefined)){
@@ -55,6 +55,16 @@ app.post('/checkLogin', function (req, res) {
     isLogined = true;
   }
   res.send({user: user, isLogined: isLogined});
+});
+
+app.post('/logout', (req, res) => {
+    req.session.destroy(function(err) {
+        if(err){
+            res.send("Logout Fail");
+        }
+        // res.clearCookie(idKey);
+        res.redirect('/');
+    });
 });
 
 
