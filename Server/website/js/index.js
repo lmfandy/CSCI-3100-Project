@@ -9,6 +9,7 @@ $(function () {
       $('#loginSignupForm').hide();
       $('#userIcon').show();
       $('#userIcon').append(res.user.toUpperCase().charAt(0));
+      $('#userName').append(res.user);
     }
   })
   .fail((jqXHR, textStatus, err) => {
@@ -25,6 +26,7 @@ $(function () {
   });
 });
 
+// Logout
 $(function () {
   $('#logoutBtn').click(() => {
     $.ajax({
@@ -38,6 +40,12 @@ $(function () {
     .fail((jqXHR, textStatus, err) => {
       alert(err);
     });
+  });
+});
+
+$(function () {
+  $('#bookingRecordBtn').click(() => {
+    window.location.href = "/customer";
   });
 });
 

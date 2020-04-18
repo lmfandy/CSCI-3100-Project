@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(session({
   secret: 'csci3100',
   store: new MongoStore({url: 'mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/sessiondb?retryWrites=true&w=majority'}),
-  cookie: { maxAge: 60 * 1000 },
+  cookie: { maxAge: 60 * 10000 },
   saveUninitialized: false,
   resave: false
 }));
@@ -89,6 +89,8 @@ app.use('/customerSignup', customerSignup);
 const ownerSignup = require('./routes/ownerSignup');
 app.use('/ownerSignup', ownerSignup);
 
+const customer_info = require('./routes/customer_info');
+app.use('/customer', customer_info);
 
 // const owner_route = require('./routes/owner');
 //

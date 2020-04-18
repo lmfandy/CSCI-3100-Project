@@ -93,3 +93,11 @@ nav {
 .sideItem{
   padding: 10px 10px 10px 40px;
 }
+
+#userName{
+  font-size: 20px;
+}
+
+.sideBtn:hover{
+   color: #429ef5;
+}

@@ -27,9 +27,9 @@ $(function () {
       .done(res => {
         alert(res);
         if (res =="CustomerLoginSuccess")
-          window.location.href = "customer_info.html";
+          window.location.href = "/";
         else if (res =="OwnerLoginSuccess")
-          window.location.href = "owner_info.html";
+          window.location.href = "/";
       })
       .fail((jqXHR, textStatus, err) => {
         alert(err);
