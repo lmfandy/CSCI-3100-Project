@@ -15,16 +15,13 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 var path = require('path');
 
-// app.use(express.static('website'));
-// app.use(express.static('website/js'));
-// app.use('/website',express.static('images'));
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(cors());
 app.use(express.json());
 
+// For Login
 app.use(session({
   secret: 'csci3100',
   store: new MongoStore({url: 'mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/sessiondb?retryWrites=true&w=majority'}),
@@ -32,6 +29,7 @@ app.use(session({
   saveUninitialized: false,
   resave: false
 }));
+
 
 // Check MongoDB Connection
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });

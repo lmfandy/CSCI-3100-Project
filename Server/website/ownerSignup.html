@@ -143,6 +143,16 @@
             <br>Input limit: 200 characters.</small>
         </div>
 
+        <h4>Pary Room Photo <span style="font-weight: bold">(Three only)</span></h4>
+        <div class="input-group">
+          <div class="custom-file">
+            <input type="file" accept="image/*">
+            <input type="file" accept="image/*">
+            <input type="file" accept="image/*">
+          </div>
+        </div>
+
+        <br>
         <h4>Price</h4>
         <div id="priceSetting">
           <div class="priceSettingBlock">
@@ -283,6 +293,20 @@
         <br>
         <p>You may add more party room later.</p>
     	  <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <form id="#testForm" class="mt-4" action="/ownerSignup/uploadPhoto" method="POST" enctype="multipart/form-data">
+        <h4>Pary Room Photo <span style="font-weight: bold">(Three only)</span></h4>
+        <div class="input-group">
+          <div class="custom-file">
+            <input type="file" name="file" accept="image/*">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <form id="#testForm2" class="mt-4" action="/ownerSignup/downloadPhoto" method="POST" enctype="multipart/form-data">
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
   </section>
 
