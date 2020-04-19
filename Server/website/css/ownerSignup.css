@@ -7,3 +7,13 @@
   font-size: 30px;
   color: #44c918;
 }
+
+.priceSettingTitle{
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.priceSettingDetail{
+  margin-left: 13px;
+}

@@ -143,35 +143,38 @@
             <br>Input limit: 200 characters.</small>
         </div>
 
-        <h4>Price and offers</h4>
-        <div>
-        <p>Price Setting 1:</p>
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            <label>Day: </label>
-            <select name="priceDay" class="form-control">
-        		  <option value="Mondays to Thursdays">Mondays to Thursdays</option>
-              <option value="Fridays">Fridays</option>
-              <option value="Saturdays">Saturdays</option>
-        			<option value="Sunday">Sunday</option>
-            </select>
-          </div>
-          <div class="form-group col-auto">
-            <label>Time: </label>
-            <div class="form-inline">
-                <input name="WeekdaysOpenTime" type="time" class="form-control" value="00:00:00">
-              <label>&emsp;to&emsp;</label>
-                <input name="WeekdaysCloseTime" type="time" class="form-control" value="00:00:00">
+        <h4>Price</h4>
+        <div id="priceSetting">
+          <div class="priceSettingBlock">
+            <p class="priceSettingTitle">Price Setting 1:</p>
+            <div class="form-row priceSettingDetail">
+              <div class="form-group col-md-3">
+                <label>Day: </label>
+                <select name="priceDay[]" class="form-control">
+            		  <option value="Mondays to Thursdays">Mondays to Thursdays</option>
+                  <option value="Fridays">Fridays</option>
+                  <option value="Saturdays">Saturdays</option>
+            			<option value="Sunday">Sunday</option>
+                </select>
+              </div>
+              <div class="form-group col-auto">
+                <label>Time: </label>
+                <div class="form-inline">
+                    <input name="priceStartTime[]" type="time" class="form-control" value="00:00:00">
+                  <label>&emsp;to&emsp;</label>
+                    <input name="priceEndTime[]" type="time" class="form-control" value="00:00:00">
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <label>Price: </label>
+                <input name="price[]" type="text" class="form-control">
+              </div>
             </div>
           </div>
-          <div class="form-group col-md-3">
-            <label>Price: </label>
-            <input name="price" type="text" class="form-control">
-          </div>
         </div>
-        </div>
-        <button>add price setting</button>
+        <button type="button" id="addPriceSettingBtn" class="btn btn-info">Add price setting</button>
 
+        <br>
         <br>
         <h4>Operating Hours </h4>
         <div>
@@ -278,6 +281,7 @@
           </div>
         </div>
         <br>
+        <p>You may add more party room later.</p>
     	  <button type="submit" class="btn btn-primary">Submit</button>
       </form>
   </section>

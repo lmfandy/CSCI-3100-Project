@@ -29,3 +29,21 @@ $(function (){
     // e.preventDefault();
   });
 });
+
+$(function (){
+  var priceSettingNum = 1;
+  $("#addPriceSettingBtn").click(() => {
+    let day = $("<div class='form-group col-md-3'><label>Day: </label><select name='priceDay[]' class='form-control'><option value='Mondays to Thursdays'>Mondays to Thursdays</option><option value='Fridays'>Fridays</option><option value='Saturdays'>Saturdays</option><option value='Sunday'>Sunday</option></select></div>");
+    let time = $("<div class='form-group col-auto'><label>Time: </label><div class='form-inline'><input name='priceStartTime[]' type='time' class='form-control' value='00:00:00'><label>&emsp;to&emsp;</label><input name='priceEndTime[]' type='time' class='form-control' value='00:00:00'></div></div>");
+    let price = $("<div class='form-group col-md-3'><label>Price: </label><input name='price[]' type='text' class='form-control'></div>");
+    let priceSettingDetail = $("<div class='form-row priceSettingDetail'></div>");
+    priceSettingDetail.append(day, time, price);
+
+    priceSettingNum++;
+    let priceSettingTitle = $("<p class='priceSettingTitle'></p>").text("Price Setting "+priceSettingNum);
+    let priceSettingBlock = $("<div class='priceSettingBlock'></div>");
+    priceSettingBlock.append(priceSettingTitle, priceSettingDetail);
+
+    $("#priceSetting").append(priceSettingBlock);
+  });
+});
