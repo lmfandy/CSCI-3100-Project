@@ -7,3 +7,7 @@
   font-size: 30px;
   color: #44c918;
 }
+
+.requiredMark{
+  color: red;
+}
