@@ -1,4 +1,5 @@
 $(function () {
+  var userType = 'guest';
   $.ajax({
     type: "post",
     async: false,
@@ -10,21 +11,35 @@ $(function () {
       $('#userIcon').show();
       $('#userIcon').append(res.user.toUpperCase().charAt(0));
       $('#userName').append(res.user);
+      if(res.userType == 'owner'){
+        $('#userIcon').css('background-color', '#eb4934');
+        userType = 'owner';
+      }
+      else{
+        userType = 'customer';
+      }
     }
   })
   .fail((jqXHR, textStatus, err) => {
     alert(err);
   });
-});
 
-// sideBar Show
-$(function () {
   $('#userIcon').click(() => {
     $("#sideBar").animate({
       width: "toggle"
     });
   });
+
+  $('#bookingRecordBtn').click(() => {
+    if(userType == 'customer') {
+      window.location.href = "/customer";
+    }
+    else if (userType == 'owner') {
+      window.location.href = "/owner";
+    }
+  });
 });
+
 
 // Logout
 $(function () {
@@ -43,11 +58,11 @@ $(function () {
   });
 });
 
-$(function () {
-  $('#bookingRecordBtn').click(() => {
-    window.location.href = "/customer";
-  });
-});
+// $(function () {
+//   $('#bookingRecordBtn').click(() => {
+//     window.location.href = "/customer";
+//   });
+// });
 
 
 $(function () {

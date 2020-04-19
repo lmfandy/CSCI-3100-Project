@@ -48,13 +48,15 @@ app.get('/', function (req, res) {
 app.use(express.static('website'));
 
 app.post('/checkLogin', (req, res) => {
-  var user = 'guest';
+  var user = '';
   var isLogined = false;
-  if (!(req.session.loginUser == undefined)){
-    user = req.session.loginUser;
+  var userType = 'guest';
+  if (!(req.session.user == undefined)){
+    user = req.session.user;
     isLogined = true;
+    userType = req.session.userType
   }
-  res.send({user: user, isLogined: isLogined});
+  res.send({user: user, isLogined: isLogined, userType: userType});
 });
 
 app.post('/logout', (req, res) => {
@@ -62,7 +64,6 @@ app.post('/logout', (req, res) => {
         if(err){
             res.send("Logout Fail");
         }
-        // res.clearCookie(idKey);
         res.redirect('/');
     });
 });
@@ -91,6 +92,9 @@ app.use('/ownerSignup', ownerSignup);
 
 const customer_info = require('./routes/customer_info');
 app.use('/customer', customer_info);
+
+const owner_info = require('./routes/owner_info');
+app.use('/owner', owner_info);
 
 // const owner_route = require('./routes/owner');
 //

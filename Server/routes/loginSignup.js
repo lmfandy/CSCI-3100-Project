@@ -32,7 +32,8 @@ router.post('/login', (req, res) => {
                 if(err){
                   res.send("Login Fail");
                 }
-                req.session.loginUser = data.username;
+                req.session.user = data.username;
+                req.session.userType = data.userType;
                 res.send("CustomerLoginSuccess");
               });
             }
@@ -53,7 +54,16 @@ router.post('/login', (req, res) => {
         else {
           // Check whether the password correct
           bcrypt.compare(data.password, owner.password, (err, result) => {
-            if(result == true) res.send("OwnerLoginSuccess");
+            if(result == true) {
+              req.session.regenerate(function(err) {
+                if(err){
+                  res.send("Login Fail");
+                }
+                req.session.user = data.username;
+                req.session.userType = data.userType;
+                res.send("OwnerLoginSuccess");
+              });
+            }
             else {
               res.send("Password Not Correct");
             }
