@@ -47,7 +47,22 @@ router.post('/signup', (req, res) => {
   });
 });
 
-router.post('/uploadPhoto',  uploadController.uploadFile);
+router.post('/uploadPhoto',  uploadController.uploadPhoto);
+
+
+router.post('/partyRoomInfo', (req, res) =>{
+  var data = req.body;
+    console.log(data);
+    client.connect(err => {
+        const collection = client.db("PartyRoomBooking").collection("PartyRoom");
+        collection.insertOne(data, (err) => {
+            if (err) throw err;
+            console.log("PartyRoom create Success!!!");
+            res.send("CreateSuccess");
+            res.redirect('/');
+        });
+    });
+});
 
 router.post('/downloadPhoto', (req, res) =>{
   // client.connect(err => {

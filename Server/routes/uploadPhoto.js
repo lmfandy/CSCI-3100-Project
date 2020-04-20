@@ -1,15 +1,12 @@
 const upload = require("./uploadPhotoMiddleware");
 
-const uploadFile = async (req, res) => {
+const uploadPhoto = async (req, res) => {
   try {
     await upload(req, res);
-
-    console.log(req.file);
-    if (req.file == undefined) {
-      return res.send(`You must select a file.`);
+    if (req.files == undefined) {
+      return res.send("You must select a file.");
     }
-
-    return res.send(`File has been uploaded.`);
+    return res.send("File has been uploaded.");
   } catch (error) {
     console.log(error);
     return res.send(`Error when trying upload image: ${error}`);
@@ -17,5 +14,5 @@ const uploadFile = async (req, res) => {
 };
 
 module.exports = {
-  uploadFile: uploadFile
+  uploadPhoto: uploadPhoto
 };
