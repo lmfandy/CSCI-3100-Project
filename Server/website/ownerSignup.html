@@ -33,7 +33,7 @@
     <div class="container " style="padding-top: 100px">
       <h1>Party Room Owner Register</h1>
       <hr>
-      <form id="ownerValidateForm" action="/ownerSignup/ownerValidate" method="post">
+      <form id="ownerInfoForm" action="/ownerSignup/signup" method="POST">
         <div class="form-group">
           <label>Party Room Company Name <span class="requiredMark">*</span>
             <input name="companyName" type="text" class="form-control" placeholder="Enter Company Name" required>
@@ -68,7 +68,7 @@
           </label>
         </div>
         <p><span class="requiredMark">*</span>required</p>
-        <button type="submit" class="btn btn-primary">Go to Add Party Room</button>
+        <button id="addPartyRoomBtn" type="button" class="btn btn-primary">Go to Add Party Room</button>
         <button type="reset" class="btn btn-primary">Reset</button>
       </form>
     </div>
@@ -77,12 +77,11 @@
   <section id="addPartyRoomPage" style="display: none">
     <div id="scrollTo" class="container " style="padding-top: 70px">
       <h1>Add Party Room</h1>
-      <hr>
-      <form id="partyroomValidateForm" action="/ownerSignup/partyroomValidate" method="post">
-        <div class="form-group">
-          <label>Party Room Name <span class="requiredMark">*</span>
-            <input name="partyRoomName" type="text" class="form-control" placeholder="Enter name of party room" required>
-          </label>
+    	<hr>
+    	<form id="partyRoomInfoForm" action="/ownerSignup/partyRoomInfo" method="POST">
+    	  <div class="form-group">
+    	    <label for="party_room_name">Party Room Name</label>
+    	    <input id="partyRoomName" name="partyRoomName" type="text" class="form-control" id="partyroomname" placeholder="Enter name of party room">
         </div>
 
         <div class="form-group">
@@ -96,16 +95,25 @@
         </div> -->
 
         <div class="form-group">
-          <label>Address 1 <span class="requiredMark">*</span>
-            <input name="address1" type="text" class="form-control" placeholder="Main Street" required>
-          </label>
+    	    <label for="inputAddress1">Address</label>
+    	    <input id="address" name="address" type="text" class="form-control" id="inputAddress" placeholder="Full Address">
+          <!-- <button>Confirm Address</button> -->
         </div>
 
-        <div class="form-group">
-          <label>Address 2 <span class="requiredMark">*</span>
-            <input name="address2" type="text" class="form-control" placeholder="Apartment, studio, or floor" required>
-          </label>
-        </div>
+        <iframe
+          id="addressMap"
+          width="300"
+          height=100%
+          frameborder="0"
+          style="display: none"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC7xcCJQ_UttAhR4MxsHau0pb4joskoAEg&q=九龍觀塘成業街成運工業大廈3樓14室"
+          allowfullscreen>
+       </iframe>
+
+        <!-- <div class="form-group">
+          <label for="inputAddress2">Address 2</label>
+          <input name="address2" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div> -->
 
         <div class="form-group">
           <label>District: <span class="requiredMark">*</span>
@@ -146,12 +154,13 @@
             <br>Input limit: 200 characters.</small>
         </div>
 
-        <h4>Pary Room Photo <span style="font-weight: bold">(Three only)</span></h4>
-        <div class="input-group">
-          <div class="custom-file">
-            <input type="file" accept="image/*">
-            <input type="file" accept="image/*">
-            <input type="file" accept="image/*">
+        <div class="form-group">
+          <label for="quotaLimit">Quota Limit</label><br>
+          <div class="form-inline">
+            <label>Min:&emsp;</label>
+            <input name="quotaLimitMin" type="number" min="1">
+            <label>&emsp;Max:&emsp;</label>
+            <input name="quotaLimitMax" type="number">
           </div>
         </div>
 
@@ -163,8 +172,8 @@
             <div class="form-row priceSettingDetail">
               <div class="form-group col-md-3">
                 <label>Day: </label>
-                <select name="priceDay[]" class="form-control">
-                  <option value="Mondays to Thursdays">Mondays to Thursdays</option>
+                <select name="priceDay" class="form-control">
+            		  <option value="Mondays to Thursdays">Mondays to Thursdays</option>
                   <option value="Fridays">Fridays</option>
                   <option value="Saturdays">Saturdays</option>
                   <option value="Sunday">Sunday</option>
@@ -173,14 +182,14 @@
               <div class="form-group col-auto">
                 <label>Time: </label>
                 <div class="form-inline">
-                  <input name="priceStartTime[]" type="time" class="form-control" value="00:00:00">
+                    <input name="priceStartTime" type="time" class="form-control" value="00:00:00">
                   <label>&emsp;to&emsp;</label>
-                  <input name="priceEndTime[]" type="time" class="form-control" value="00:00:00">
+                    <input name="priceEndTime" type="time" class="form-control" value="00:00:00">
                 </div>
               </div>
               <div class="form-group col-md-3">
                 <label>Price: </label>
-                <input name="price[]" type="text" class="form-control" value="0">
+                <input name="price" type="text" class="form-control" value="0">
               </div>
             </div>
           </div>
@@ -298,22 +307,24 @@
             </div>
           </div>
         </div>
+        <br>
         <p class="hint">You may add more party room later.</p>
         <p><span class="requiredMark">*</span>required</p>
-        <button type="submit" class="btn btn-primary">Submit</button>
+    	  <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
       </form>
 
-      <!-- <form id="#testForm" class="mt-4" action="/ownerSignup/uploadPhoto" method="POST" enctype="multipart/form-data">
+      <form id="testForm" class="mt-4" action="">
         <h4>Pary Room Photo <span style="font-weight: bold">(Three only)</span></h4>
         <div class="input-group">
           <div class="custom-file">
-            <input type="file" name="file" accept="image/*">
+            <input id="photos" type="file" name="photo" accept="image/*" multiple="multiple">
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
       </form>
 
-      <form id="#testForm2" class="mt-4" action="/ownerSignup/downloadPhoto" method="POST" enctype="multipart/form-data">
+      <button id="submitBtn" type="button" class="btn btn-primary">Submit</button>
+      <!-- <form id="#testForm2" class="mt-4" action="/ownerSignup/downloadPhoto" method="POST" enctype="multipart/form-data">
         <button type="submit" class="btn btn-primary">Submit</button>
       </form> -->
   </section>
