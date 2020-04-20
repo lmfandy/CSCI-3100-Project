@@ -5,12 +5,21 @@ const uploadController = require("./uploadPhoto");
 
 // MongoDB & mongoose:
 const mongo = require('mongodb')
-const mongoose = require('mongoose');;
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/PartyRoomBooking?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
-const Grid = require('gridfs-stream');
+const mongoose = require('mongoose');
+var Grid = require('gridfs-stream');
+var fs = require('fs');
+
+const conn = mongoose.createConnection(uri);
+let gfs;
+
+conn.once('open', () => {
+  // Init stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('photos');
+});
 
 // Other packages:
 const bodyParser = require("body-parser");
@@ -41,31 +50,48 @@ router.post('/signup', (req, res) => {
 router.post('/uploadPhoto',  uploadController.uploadFile);
 
 router.post('/downloadPhoto', (req, res) =>{
-  // const collection = client.db("PartyRoomBooking").collection("photo.chunks");
-  // collection.find({}).sort( { n: 1 } );
-  // var role = req.session.user.role;
-  // var conn = mongoose.connection;
-  var gfs = Grid(client.db("PartyRoomBooking"), mongo);
-   gfs.findOne({}, function (err, file) {
-    if (err) {
-        return res.status(400).send(err);
-    }
-    else if (!file) {
-        return res.status(404).send('Error on the database looking for the file.');
-    }
+  // client.connect(err => {
+    gfs.files.find().toArray((err, files) => {
+      // Check if files
+      if (!files || files.length === 0) {
+        return res.status(404).json({
+          err: 'No files exist'
+        });
+      }
 
-    res.set('Content-Type', file.contentType);
-    res.set('Content-Disposition', 'attachment; filename="' + file.filename + '"');
+      files.forEach((file, i) => {
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+          // Read output to browser
+          const readstream = gfs.createReadStream(file.filename);
+          readstream.pipe(res);
+        } else {
+          res.status(404).json({
+            err: 'Not an image'
+          });
+        }
+      });
 
-    var readstream = gfs.createReadStream({
-      filename: "1587317221121-bezkoder-csci3100_tree.png"
+      // Files exist
+      // return res.json(files);
     });
-
-    readstream.on("error", function(err) {
-        res.end();
-    });
-    readstream.pipe(res);
-  });
+  // });
 });
+
+  // gfs.files.find({}).toArray(function (err, files) {
+  //   if (err) {
+  //     res.json(err);
+  //   }
+  //   if (files.length > 0) {
+  //     var mime = files[0].contentType;
+  //     var filename = files[0].filename;
+  //     res.set('Content-Type', mime);
+  //     res.set('Content-Disposition', "inline; filename=" + filename);
+  //     var read_stream = gfs.createReadStream({_id: file_id});
+  //     read_stream.pipe(res);
+  //   } else {
+  //     res.json('File Not Found');
+  //   }
+  // });
+// });
 
 module.exports = router;
