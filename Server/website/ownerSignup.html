@@ -31,10 +31,10 @@
     <div class="container " style="padding-top: 100px">
       <h1>Party Room Owner Register</h1>
       <hr>
-      <form id="ownerSignUpForm" action="/ownerSignup/signup" method="post">
+      <form id="ownerInfoForm">
         <div class="form-group">
           <label>Party Room Company Name
-            <input name="partyRoomName" type="text" class="form-control" placeholder="Enter Company Name">
+            <input name="companyName" type="text" class="form-control" placeholder="Enter Company Name">
           </label>
           <small class="form-text text-muted">Make sure your company have done the business registration in Hong Kong.</small>
         </div>
@@ -76,12 +76,11 @@
     </div>
   </section>
 
-  <!-- <section id="addPartyRoomPage" style="display: none"> -->
-  <section id="addPartyRoomPage">
-    <div class="container " style="padding-top: 100px">
+  <section id="addPartyRoomPage" style="display: none">
+    <div id="scrollTo" class="container " style="padding-top: 70px">
       <h1>Add Party Room</h1>
     	<hr>
-    	<form>
+    	<form id="ownerSignUpForm" action="/ownerSignup/signup" method="post">
     	  <div class="form-group">
     	    <label for="party_room_name">Party Room Name</label>
     	    <input name="partyRoomName" type="text" class="form-control" id="partyroomname" placeholder="Enter name of party room">
@@ -97,7 +96,7 @@
         </div> -->
 
         <div class="form-group">
-    	    <label for="address">Address 1</label>
+    	    <label for="inputAddress1">Address 1</label>
     	    <input name="address1" type="text" class="form-control" id="inputAddress1" placeholder="Main Street">
         </div>
 
@@ -108,7 +107,7 @@
 
         <div class="form-group">
           <label for="district">District:</label>
-          <select name="district" id="district1" class="form-control">
+          <select name="district" id="district" class="form-control">
             <option value="" ></option>
             <option value="" disabled>Hong Kong Island:</option>
       		  <option value="cenwest">Central & Western District</option>
@@ -137,8 +136,8 @@
         </div>
 
         <div class="form-group">
-          <label for"party_room_info">Description of your party room</label><br>
-          <textarea class="form-control" name="partyRoomDescr" rows="6" cols="40"></textarea>
+          <label for="partyRoomDescr">Description of your party room</label><br>
+          <textarea class="form-control" name="partyRoomDescr" id="partyRoomDescr" rows="6" cols="40"></textarea>
           <small id="createHelp1" class="form-text text-muted">Describe your party room (e.g. features, characteristics)
             <br>Input limit: 200 characters.</small>
         </div>
@@ -295,7 +294,7 @@
     	  <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
-      <form id="#testForm" class="mt-4" action="/ownerSignup/uploadPhoto" method="POST" enctype="multipart/form-data">
+      <!-- <form id="#testForm" class="mt-4" action="/ownerSignup/uploadPhoto" method="POST" enctype="multipart/form-data">
         <h4>Pary Room Photo <span style="font-weight: bold">(Three only)</span></h4>
         <div class="input-group">
           <div class="custom-file">
@@ -307,7 +306,7 @@
 
       <form id="#testForm2" class="mt-4" action="/ownerSignup/downloadPhoto" method="POST" enctype="multipart/form-data">
         <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      </form> -->
   </section>
 
 

@@ -13,11 +13,11 @@ $(function(){
           $("#signupSuccessPage").show();
           $("#customerCreatePage").hide();
         }
-        form[0].reset();
+        //form[0].reset();
       })
       .fail((jqXHR, textStatus, err) => {
         alert(err);
-        form[0].reset();
+        //form[0].reset();
       });
     e.preventDefault();
   });
