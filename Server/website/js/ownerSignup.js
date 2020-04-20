@@ -132,6 +132,30 @@ $(function () {
 //   });
 // });
 
+//not finished
+function signUp() {
+  $.ajax({
+    type: "POST",
+    async: false,
+    dataType: "json",
+    data: {owner: $("#ownerValidateForm").serialize(), partyroom: $("#partyroomValidateForm").serialize()},
+    url: "/ownerSignup/signup"
+  })
+    .done(res => {
+      if (res == "SignupSuccess") {
+        $("#signupSuccessPage").show();
+        $("#ownerCreatePage").hide();
+        $("#addPartyRoomPage").hide();
+      }
+      else alert("Something strange happen...");
+      //form[0].reset();
+    })
+    .fail((jqXHR, textStatus, err) => {
+      alert(err);
+      //form[0].reset();
+    });
+}
+
 $(function () {
   var priceSettingNum = 1;
   $("#addPriceSettingBtn").click(() => {
