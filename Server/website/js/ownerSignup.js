@@ -1,55 +1,26 @@
 $(function () {
-  var ownerData = "";
-
-  $("#ownerInfoForm").submit(function (e) {
-    // var form = $(this);
-    // var url = form.attr('action');
-    // ownerData = form.serialize();
-    // console.log(ownerData);
-
-    $("#addPartyRoomPage").show();
-    $("html").animate({ scrollTop: $("#scrollTo").offset().top }, 400);
-    // $("#ownerCreatePage").hide();
-
-    // $.ajax({
-    //   type: "POST",
-    //   async: false,
-    //   data: form.serialize(),
-    //   url: url
-    // })
-    // .done(res => {
-    //   if (res == "SignupSuccess") {
-    //     $("#signupSuccessPage").show();
-    //     $("#ownerCreatePage").hide();
-    //   }
-    //   form[0].reset();
-    // })
-    // .fail((jqXHR, textStatus, err) => {
-    //   alert(err);
-    //   form[0].reset();
-    // });
+  // not finished
+  $("#ownerValidateForm").submit(function (e) {
     e.preventDefault();
-  });
-
-  $("#ownerSignUpForm").submit(function (e) {
     var form = $(this);
     var url = form.attr('action');
-    ownerData = $("#ownerInfoForm").serialize() + "&" + form.serialize();
-    // alert($("#ownerInfoForm").serialize());
-    // alert(form.serialize());
-    //alert(ownerData);
 
     $.ajax({
       type: "POST",
       async: false,
-      data: ownerData,
+      data: form.serialize(),
       url: url
     })
       .done(res => {
-        if (res == "SignupSuccess") {
-          $("#signupSuccessPage").show();
-          $("#ownerCreatePage").hide();
-          $("#addPartyRoomPage").hide();
+        if (res == "companyNameRegistered")
+          alert("This company is already registered!");
+        else if (res == "usernameUsed")
+          alert("This username is already used!");
+        else if (res == "emailRegistered")
+          alert("This email is already registered!");
+        else if (res == "pass") {
+          $("#addPartyRoomPage").show();
+          $("html").animate({ scrollTop: $("#scrollTo").offset().top }, 400);
         }
         //form[0].reset();
       })
@@ -57,10 +28,56 @@ $(function () {
         alert(err);
         //form[0].reset();
       });
+  });
 
+  // not finished
+  $("#partyroomValidateForm").submit(function (e) {
     e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+
+    $.ajax({
+      type: "POST",
+      async: false,
+      data: form.serialize(),
+      url: url
+    })
+      .done(res => {
+        if (res == "partyroomRegistered")
+          alert("This partyroom is already registered!");
+        else if (res == "pass") signUp();
+        //form[0].reset();
+      })
+      .fail((jqXHR, textStatus, err) => {
+        alert(err);
+        //form[0].reset();
+      });
   });
 });
+
+//not finished
+function signUp() {
+  $.ajax({
+    type: "POST",
+    async: false,
+    dataType: "json",
+    data: {owner: $("#ownerValidateForm").serialize(), partyroom: $("#partyroomValidateForm").serialize()},
+    url: "/ownerSignup/signup"
+  })
+    .done(res => {
+      if (res == "SignupSuccess") {
+        $("#signupSuccessPage").show();
+        $("#ownerCreatePage").hide();
+        $("#addPartyRoomPage").hide();
+      }
+      else alert("Something strange happen...");
+      //form[0].reset();
+    })
+    .fail((jqXHR, textStatus, err) => {
+      alert(err);
+      //form[0].reset();
+    });
+}
 
 $(function () {
   var priceSettingNum = 1;

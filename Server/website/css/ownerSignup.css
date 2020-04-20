@@ -17,3 +17,11 @@
 .priceSettingDetail{
   margin-left: 13px;
 }
+
+.requiredMark{
+  color: red;
+}
+
+.hint{
+  color: blue;
+}

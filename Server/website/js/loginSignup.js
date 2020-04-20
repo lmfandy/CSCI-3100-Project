@@ -16,8 +16,10 @@ $(function () {
 
 $(function () {
   $("#loginForm").submit(function (e) {
+    e.preventDefault();
     var form = $(this);
     var url = form.attr('action');
+    var data = form.serializeArray();
     $.ajax({
       type: "POST",
       async: false,
@@ -32,7 +34,6 @@ $(function () {
       .fail((jqXHR, textStatus, err) => {
         alert(err);
       });
-    e.preventDefault();
   });
 });
 
