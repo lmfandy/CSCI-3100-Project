@@ -18,15 +18,15 @@ const owner_schema = new Schema({
         required: true,
         unique: true
     },
-    email:{
+    email: {
         type: String,
         required: true,
     },
-    password:{
+    password: {
         type: String,
         required: true,
     },
-    phone:{
+    phone: {
         type: String,
         required: true,
     }
@@ -35,5 +35,5 @@ const owner_schema = new Schema({
     timestamps: true,
 });
 
-const owner = conn.model('owner',owner_schema);
+const owner = conn.model('owner', owner_schema);
 module.exports = owner;

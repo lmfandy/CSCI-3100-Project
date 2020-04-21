@@ -30,7 +30,6 @@ app.use(session({
   resave: false
 }));
 
-
 // Check MongoDB Connection
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
@@ -115,6 +114,9 @@ app.use('/create_partyroom', createPartyRoom);
 
 const owner_route = require('./routes/owner');
 app.use('/owners', owner_route);
+
+const customer_route = require('./routes/customer');
+app.use('/customers', customer_route);
 
 app.listen(3000, () => {
   console.log("server is listening on port 3000");

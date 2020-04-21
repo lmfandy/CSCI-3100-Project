@@ -23,7 +23,6 @@ router.route('/add').post((req, res) => {
         email,
         password,
         phone,
-
     });
 
     new_owner.save()
