@@ -33,7 +33,8 @@ app.use(session({
 }));
 
 // Check MongoDB Connection
-mongoose.connect("mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/PartyRoomBooking", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+// mongoose.connect("mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/PartyRoomBooking", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/PartyRoomBooking");
 const connection = mongoose.connection;
 
 connection.once('open', () => {
@@ -82,12 +83,7 @@ conn.once('open', () => {
 app.get('/search', (req, res) => {
   PartyRoom.find({}, async (err, r)=>{
     console.log(r);
-
-    // var data = req.query;
-    // console.log(data);
     console.log("Search Success!!!");
-    //test results
-    // var count = Math.floor(Math.random() * 13);
     var result = [];
     for (let i = 0; i < r.length; i++){
       let image = "";
@@ -98,7 +94,6 @@ app.get('/search', (req, res) => {
           });
         }
         const readstream = gfs.createReadStream(file.filename);
-        // readstream.pipe(res);
         readstream.on('data', (chunk) => {
           image += chunk.toString('base64');
         });
@@ -133,10 +128,10 @@ app.post('/addPartyTest', function(req,res){
       }
       client.connect(err => {
         const collection = client.db("PartyRoomBooking").collection("photos.files");
-        collection.findOne({ filename: "456_test1.jpg"}, (err, p) => {
+        collection.findOne({ filename: "456_test3.jpg"}, (err, p) => {
           var r = new PartyRoom({
             party_room_id: maxId+1,
-            party_room_name: "CUHK4",
+            party_room_name: "CUHK3",
             party_room_number: "12345678",
             address: "CUHK",
             district: "Kwun Tong",
