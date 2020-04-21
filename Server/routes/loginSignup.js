@@ -45,7 +45,7 @@ router.post('/login', (req, res) => {
       });
     }
     else if (data.userType == "owner") {
-      const ownerColl = client.db("PartyRoomBooking").collection("owner");
+      const ownerColl = client.db("PartyRoomBooking").collection("owners");
       ownerColl.findOne({ username: data.username }, { password: 1 }, (err, owner) => {
         // Check whether the username exist
         if (owner == null) {
