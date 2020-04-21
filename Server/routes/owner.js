@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+const bcrypt = require('bcrypt');
 let Owner = require('../models/owner.model');
 
 router.route('/').get((req, res) => {
@@ -9,11 +9,13 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
+    bcrypt.hash(req.body.password, 10, function (err,   hash) {
+    });
     const companyName = req.body.companyName;
     const name = req.body.name;
     const username = req.body.username;
     const email = req.body.email;
-    const password = req.body.password;
+    const password = bcrypt.hashSync(req.body.password, 10);
     const phone = req.body.phone;
 
     const new_owner = new Owner({
@@ -23,6 +25,7 @@ router.route('/add').post((req, res) => {
         email,
         password,
         phone,
+
     });
 
     new_owner.save()
