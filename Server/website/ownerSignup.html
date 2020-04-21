@@ -26,9 +26,11 @@
   <!-- NAVBAR -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow-sm">
     <a class="navbar-brand mr-auto" href="index.html">LetParty</a>
-    <form action="/loginSignup" method="get"><input id="loginSignupBtn" type="submit"
-        class="btn btn-outline-primary my-2 my-sm-0" value="Login / Sign Up"></form>
+    <form action="/loginSignup" method="get">
+      <input id="loginSignupBtn" type="submit" class="btn btn-outline-primary my-2 my-sm-0" value="Login / Sign Up">
+    </form>
   </nav>
+
   <section id="ownerCreatePage">
     <div class="container " style="padding-top: 100px">
       <h1>Party Room Owner Register</h1>
@@ -79,12 +81,12 @@
     <div id="scrollTo" class="container " style="padding-top: 70px">
       <h1>Add Party Room</h1>
     	<hr>
-    	<form id="partyRoomInfoForm" name="partyRoomInfoForm" method = "post" action="/create_partyroom/create">
+    	<form id="partyRoomInfoForm" name="partyRoomInfoForm" method = "POST" action="/create_partyroom/create">
     	  <div class="form-group">
-    	    <label for="party_room_name">Party Room Name</label>
+    	    <label for="party_room_name">Party Room Name
     	    <input id="partyRoomName" name="partyRoomName" type="text" class="form-control" id="partyroomname" placeholder="Enter name of party room">
+          </label>
         </div>
-
         <div class="form-group">
           <label>Party Room Phone Number <span class="requiredMark">*</span>
             <input name="partyRoomPhoneNum" type="text" class="form-control" placeholder="Enter phone number" required>
@@ -94,13 +96,12 @@
     	    <label for="room_name">Room name</label>
     	    <input type="text" class="form-control" id="roomname" placeholder="Enter name of room">
         </div> -->
-
         <div class="form-group">
-    	    <label for="inputAddress1">Address</label>
-    	    <input id="address" name="address" type="text" class="form-control" id="inputAddress" placeholder="Full Address">
+          <label>Address <span class="requiredMark">*</span>
+            <input id="address" name="address" type="text" class="form-control" placeholder="Full Address">
+          </label>
           <!-- <button>Confirm Address</button> -->
         </div>
-
         <iframe
           id="addressMap"
           width="100%"
@@ -108,13 +109,11 @@
           frameborder="0"
           style="display: none"
           allowfullscreen>
-       </iframe>
-
+        </iframe>
         <!-- <div class="form-group">
           <label for="inputAddress2">Address 2</label>
           <input name="address2" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
         </div> -->
-
         <div class="form-group">
           <label>District: <span class="requiredMark">*</span>
             <select name="district" class="form-control" required>
@@ -145,7 +144,6 @@
             </select>
           </label>
         </div>
-
         <div class="form-group">
           <label>Description of your party room:
             <textarea class="form-control" name="partyRoomDescr" rows="6" cols="40"></textarea>
@@ -153,17 +151,16 @@
           <small class="form-text text-muted">Describe your party room (e.g. features, characteristics)
             <br>Input limit: 200 characters.</small>
         </div>
-
         <div class="form-group">
-          <label for="quotaLimit">Quota Limit</label><br>
-          <div class="form-inline">
-            <label>Min:&emsp;</label>
-            <input name="quotaLimitMin" type="number" min="1">
-            <label>&emsp;Max:&emsp;</label>
-            <input name="quotaLimitMax" type="number">
-          </div>
+          <label>Quota Limit<br>
+            <div class="form-inline">
+              <label>Min:&emsp;</label>
+              <input name="quotaLimitMin" type="number" min="1">
+              <label>&emsp;Max:&emsp;</label>
+              <input name="quotaLimitMax" type="number">
+            </div>
+          </label>
         </div>
-
         <br>
         <h4>Price</h4>
         <div id="priceSetting">
@@ -171,25 +168,28 @@
             <p class="priceSettingTitle">Price Setting 1:</p>
             <div class="form-row priceSettingDetail">
               <div class="form-group col-md-3">
-                <label>Day: </label>
-                <select name="priceDay" class="form-control">
-            		  <option value="Mondays to Thursdays">Mondays to Thursdays</option>
-                  <option value="Fridays">Fridays</option>
-                  <option value="Saturdays">Saturdays</option>
-                  <option value="Sunday">Sunday</option>
-                </select>
+                <label>Day:
+                  <select name="priceDay" class="form-control">
+                    <option value="Mondays to Thursdays">Mondays to Thursdays</option>
+                    <option value="Fridays">Fridays</option>
+                    <option value="Saturdays">Saturdays</option>
+                    <option value="Sunday">Sunday</option>
+                  </select>
+                </label>
               </div>
               <div class="form-group col-auto">
-                <label>Time: </label>
-                <div class="form-inline">
+                <label>Time:
+                  <div class="form-inline">
                     <input name="priceStartTime" type="time" class="form-control" value="00:00:00">
-                  <label>&emsp;to&emsp;</label>
+                    <label>&emsp;to&emsp;</label>
                     <input name="priceEndTime" type="time" class="form-control" value="00:00:00">
-                </div>
+                  </div>
+                </label>
               </div>
               <div class="form-group col-md-3">
-                <label>Price: </label>
-                <input name="price" type="text" class="form-control" value="0">
+                <label>Price:
+                  <input name="price" type="text" class="form-control" value="0">
+                </label>
               </div>
             </div>
           </div>
@@ -212,7 +212,6 @@
             </div>
           </div>
         </div>
-
         <div>
           Fridays:
           <div class="form-inline">
@@ -226,7 +225,6 @@
             </div>
           </div>
         </div>
-
         <div>
           Saturdays:
           <div class="form-inline">
@@ -240,7 +238,6 @@
             </div>
           </div>
         </div>
-
         <div>
           Sunday:
           <div class="form-inline">
@@ -254,7 +251,6 @@
             </div>
           </div>
         </div>
-
         <div>
           Public Holidays:
           <div class="form-inline">
@@ -268,7 +264,6 @@
             </div>
           </div>
         </div>
-
         <br>
         <h4>Facilities:</h4>
         <div class="row px-3">
@@ -310,7 +305,7 @@
         <br>
         <p class="hint">You may add more party room later.</p>
         <p><span class="requiredMark">*</span>required</p>
-    	  <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
       </form>
 
       <form id="testForm" class="mt-4" action="">
