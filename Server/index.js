@@ -81,9 +81,21 @@ conn.once('open', () => {
 });
 
 app.get('/search', (req, res) => {
-  PartyRoom.find({}, async (err, r)=>{
-    console.log(r);
+  console.log(d.getDay());
+  var query = { party_room_name: req.query.partyRoomName,
+    district: req.query.district,
+    quotaMin: {$lte: req.query.numPeople},
+    quotaMax: {$gte: req.query.numPeople}
+  };
+  console.log(req.query);
+  if (req.query.partyRoomName == '') delete query.party_room_name;
+  if (req.query.district == '') delete query.district;
+  console.log(query);
+
+  PartyRoom.find(query , async (err, r)=>{
     console.log("Search Success!!!");
+    if (err) console.log(err);
+    console.log(r);
     var result = [];
     for (let i = 0; i < r.length; i++){
       let image = "";
@@ -116,6 +128,43 @@ app.get('/search', (req, res) => {
     }, 500);
   });
 });
+
+// app.get('/search', (req, res) => {
+//   PartyRoom.find({}, async (err, r)=>{
+//     console.log(r);
+//     console.log("Search Success!!!");
+//     var result = [];
+//     for (let i = 0; i < r.length; i++){
+//       let image = "";
+//       gfs.files.findOne({_id: r[i].photos[0]}, (err, file) => {
+//         if (!file || file.length === 0) {
+//           return res.status(404).json({
+//             err: 'No files exist'
+//           });
+//         }
+//         const readstream = gfs.createReadStream(file.filename);
+//         readstream.on('data', (chunk) => {
+//           image += chunk.toString('base64');
+//         });
+//         readstream.on('end', () => {
+//           result.push({
+//             img: image,
+//             title: r[i].party_room_name,
+//             description: r[i].description,
+//             capacity: "min: "+r[i].quotaMin+" max: "+r[i].quotaMax,
+//             location: r[i].district,
+//             price: "See More"
+//           });
+//         })
+//       });
+//     }
+//     setTimeout(() => {
+//       res.send({
+//         hasResult: r.length, result: result
+//       });
+//     }, 500);
+//   });
+// });
 
 app.post('/addPartyTest', function(req,res){
     PartyRoom.find({}, 'party_room_id').sort({party_room_id: -1}).limit(1).exec(function(err, maxIdRoom) {
