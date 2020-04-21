@@ -93,6 +93,7 @@ $(function () {
     })
       .done(res => {
         alert("Search Success!");
+        console.log(res);
         if (res.hasResult) {
           $("#searchResult").html("");
           $("html").animate({ scrollTop: $("#scrollTo").offset().top }, 600);
@@ -124,7 +125,7 @@ function createCard(img, title, description, capacity, location, price) {
   let card = $("<div class='m-2 card'></div>");
 
   let cardImg = $("<img class='card-img-top'></img>");
-  cardImg.attr("src", img);
+  cardImg.attr("src", "data:image/png;base64,"+img);
   cardImg.attr("alt", "Card image cap");
   cardImg.attr("width", "256px");
   cardImg.attr("height", "200px");

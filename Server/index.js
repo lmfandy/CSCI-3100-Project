@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/PartyRoomBooking?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const mongoose = require('mongoose');
@@ -21,6 +21,8 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
+const PartyRoom = require('./models/partyRoom.model');
+
 // For Login
 app.use(session({
   secret: 'csci3100',
@@ -32,7 +34,7 @@ app.use(session({
 
 
 // Check MongoDB Connection
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/PartyRoomBooking", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 
 connection.once('open', () => {
@@ -66,30 +68,104 @@ app.post('/logout', (req, res) => {
   });
 });
 
+var Grid = require('gridfs-stream');
+var fs = require('fs');
+
+const conn = mongoose.createConnection(uri);
+let gfs;
+
+conn.once('open', () => {
+  // Init stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('photos');
+});
 
 app.get('/search', (req, res) => {
-  var data = req.query;
-  console.log(data);
-  client.connect(err => {
+  PartyRoom.find({}, async (err, r)=>{
+    console.log(r);
+
+    // var data = req.query;
+    // console.log(data);
     console.log("Search Success!!!");
     //test results
-    var count = Math.floor(Math.random() * 13);
+    // var count = Math.floor(Math.random() * 13);
     var result = [];
-    for (let i = 0; i < count; i++)
-      result.push({
-        img: "images/card-img.png",
-        title: "Party Room No." + (i + 1),
-        description: "This is a longer card with supporting text below as a natural lead-in to additional content." +
-          "This content is a little bit longer.",
-        capacity: Math.floor(Math.random() * 25) + 6,
-        location: "CUHK",
-        price: "FREE"
+    for (let i = 0; i < r.length; i++){
+      let image = "";
+      gfs.files.findOne({_id: r[i].photos[0]}, (err, file) => {
+        if (!file || file.length === 0) {
+          return res.status(404).json({
+            err: 'No files exist'
+          });
+        }
+        const readstream = gfs.createReadStream(file.filename);
+        // readstream.pipe(res);
+        readstream.on('data', (chunk) => {
+          image = chunk.toString('base64');
+          result.push({
+            img: image,
+            title: r[i].party_room_name,
+            description: r[i].description,
+            capacity: "min: "+r[i].quotaMin+" max: "+r[i].quotaMax,
+            location: r[i].district,
+            price: "See More"
+          });
+        });
       });
-    console.log(count);
-    res.send({
-      hasResult: count, result: result
-    });
+    }
+    setTimeout(() => {
+      res.send({
+        hasResult: r.length, result: result
+      });
+    }, 200);
   });
+});
+
+app.post('/addPartyTest', function(req,res){
+    PartyRoom.find({}, 'party_room_id').sort({party_room_id: -1}).limit(1).exec(function(err, maxIdRoom) {
+      if (err) res.send(err);
+      if (maxIdRoom.length == 1) {
+        maxId = maxIdRoom[0].party_room_id;
+      }
+      else {
+        maxId = 0;
+      }
+      client.connect(err => {
+        const collection = client.db("PartyRoomBooking").collection("photos.files");
+        collection.findOne({ filename: "1587399998006-bezkoder-test2.jpg"}, (err, p) => {
+          var r = new PartyRoom({
+            party_room_id: maxId+1,
+            party_room_name: "CUHK2",
+            party_room_number: "12345678",
+            address: "CUHK",
+            district: "Kwun Tong",
+            description: "CUHK",
+            quotaMin: 2,
+            quotaMax: 20,
+            price_setting: [{
+              day: "Monday to Thursday",
+              startTime: "08:00:00",
+              endTime: "12:00:00",
+              price: 100
+            },{
+              day: "Friday",
+              startTime: "08:00:00",
+              endTime: "12:00:00",
+              price: 100
+            }],
+            facilities: ["VR","Switch"],
+            photos: [p._id]
+          });
+
+          r.save(function(err) {
+            if (err) res.send(err);
+            else{
+              res.send("done");
+            }
+          });
+        });
+      });
+    });
 });
 
 // For Login page

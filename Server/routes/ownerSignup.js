@@ -125,6 +125,7 @@ router.post('/downloadPhoto', (req, res) => {
         // Read output to browser
         const readstream = gfs.createReadStream(file.filename);
         readstream.pipe(res);
+        console.log(res);
       } else {
         res.status(404).json({
           err: 'Not an image'
