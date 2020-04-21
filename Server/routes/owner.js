@@ -1,4 +1,5 @@
 const router = require('express').Router();
+
 let Owner = require('../models/owner.model');
 
 router.route('/').get((req, res) => {
@@ -8,24 +9,26 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const owner_name = req.body.owner_name;
+    const companyName = req.body.companyName;
+    const name = req.body.name;
     const username = req.body.username;
-    const party_room_name = req.body.party_room_name;
     const email = req.body.email;
     const password = req.body.password;
+    const phone = req.body.phone;
 
     const new_owner = new Owner({
-        owner_name,
+        companyName,
+        name,
         username,
-        party_room_name,
         email,
         password,
-
+        phone,
     });
 
     new_owner.save()
-        .then(() => res.json('Owner added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .then(() => res.redirect('/signupSuccess.html'))
+        .catch(err => res.redirect('/signupFail.html'));
+
 });
 
 module.exports = router;

@@ -1,39 +1,41 @@
 $(function () {
- $('#address').on('change', function() {
-   if($(this).val() != '') {
-     $('#addressMap').show();
-     $('#addressMap').attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyC7xcCJQ_UttAhR4MxsHau0pb4joskoAEg&q="+$(this).val());
-   }
-   else{
-     $('#addressMap').slideUp();
-   }
- });
+  $('#address').on('change', function () {
+    if ($(this).val() != '') {
+      $('#addressMap').show();
+      $('#addressMap').attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyC7xcCJQ_UttAhR4MxsHau0pb4joskoAEg&q=" + $(this).val());
+    }
+    else {
+      $('#addressMap').slideUp();
+    }
+  });
 });
 
 $(function () {
-  $("#addPartyRoomBtn").click(()=>{
+  $("#ownerInfoForm").submit(function (e) {
+    e.preventDefault();
     $("#addPartyRoomPage").show();
     $("html").animate({ scrollTop: $("#scrollTo").offset().top }, 400);
   });
+
   var isUploaded = false;
   $("#submitBtn").click(() => {
-      var fd = new FormData();
-      var photoTotal = document.getElementById('photos').files.length;
-      for (var i = 0; i < photoTotal; i++) {
-        newName = $("#partyRoomName").val()+"_photo"+i;
-        console.log(newName);
-        fd.append("file", document.getElementById('photos').files[i], newName);
-      }
-      fd.append("partyRoomName", $("#partyRoomName").val());
+    var fd = new FormData();
+    var photoTotal = document.getElementById('photos').files.length;
+    for (var i = 0; i < photoTotal; i++) {
+      var newName = $("#partyRoomName").val() + "_photo" + i;
+      console.log(newName);
+      fd.append("file", document.getElementById('photos').files[i], newName);
+    }
+    fd.append("partyRoomName", $("#partyRoomName").val());
 
-      $.ajax({
-        type: "POST",
-        contentType: false,
-        processData: false,
-        async: false,
-        data: fd,
-        url: "/ownerSignup/uploadPhoto"
-      })
+    $.ajax({
+      type: "POST",
+      contentType: false,
+      processData: false,
+      async: false,
+      data: fd,
+      url: "/ownerSignup/uploadPhoto"
+    })
       .done(res => {
         if (res == "File has been uploaded.") {
           var form = document.forms['partyRoomInfoForm'].elements;
@@ -57,31 +59,31 @@ $(function () {
       .fail((jqXHR, textStatus, err) => {
         alert(err);
       });
-      // e.preventDefault();
-      // $("#partyRoomInfoForm").submit();
-      //   $("#partyRoomInfoForm").submit(function (e) {
-      //     var form = $(this);
-      //     var url = form.attr('action');
-      //     $.ajax({
-      //       type: "POST",
-      //       async: false,
-      //       data: form.serialize(),
-      //       url: url
-      //     })
-      //     .done(res => {
-      //       if (res == "CreateSuccess") {
-      //         $("#signupSuccessPage").show();
-      //         $("#ownerCreatePage").hide();
-      //       }
-      //       form[0].reset();
-      //     })
-      //     .fail((jqXHR, textStatus, err) => {
-      //       alert(err);
-      //       form[0].reset();
-      //     });
-      //     e.preventDefault();
-      //   });
-      // else console.log(res);
+    // e.preventDefault();
+    // $("#partyRoomInfoForm").submit();
+    //   $("#partyRoomInfoForm").submit(function (e) {
+    //     var form = $(this);
+    //     var url = form.attr('action');
+    //     $.ajax({
+    //       type: "POST",
+    //       async: false,
+    //       data: form.serialize(),
+    //       url: url
+    //     })
+    //     .done(res => {
+    //       if (res == "CreateSuccess") {
+    //         $("#signupSuccessPage").show();
+    //         $("#ownerCreatePage").hide();
+    //       }
+    //       form[0].reset();
+    //     })
+    //     .fail((jqXHR, textStatus, err) => {
+    //       alert(err);
+    //       form[0].reset();
+    //     });
+    //     e.preventDefault();
+    //   });
+    // else console.log(res);
     // if (isUploaded == true){
     //   $("#partyRoomInfoForm").submit(function (e) {
     //     var form = $(this);
@@ -179,7 +181,7 @@ function signUp() {
     type: "POST",
     async: false,
     dataType: "json",
-    data: {owner: $("#ownerValidateForm").serialize(), partyroom: $("#partyroomValidateForm").serialize()},
+    data: { owner: $("#ownerValidateForm").serialize(), partyroom: $("#partyroomValidateForm").serialize() },
     url: "/ownerSignup/signup"
   })
     .done(res => {
