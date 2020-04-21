@@ -100,7 +100,9 @@ app.get('/search', (req, res) => {
         const readstream = gfs.createReadStream(file.filename);
         // readstream.pipe(res);
         readstream.on('data', (chunk) => {
-          image = chunk.toString('base64');
+          image += chunk.toString('base64');
+        });
+        readstream.on('end', () => {
           result.push({
             img: image,
             title: r[i].party_room_name,
@@ -109,14 +111,14 @@ app.get('/search', (req, res) => {
             location: r[i].district,
             price: "See More"
           });
-        });
+        })
       });
     }
     setTimeout(() => {
       res.send({
         hasResult: r.length, result: result
       });
-    }, 200);
+    }, 500);
   });
 });
 
@@ -131,14 +133,14 @@ app.post('/addPartyTest', function(req,res){
       }
       client.connect(err => {
         const collection = client.db("PartyRoomBooking").collection("photos.files");
-        collection.findOne({ filename: "1587399998006-bezkoder-test2.jpg"}, (err, p) => {
+        collection.findOne({ filename: "456_test1.jpg"}, (err, p) => {
           var r = new PartyRoom({
             party_room_id: maxId+1,
-            party_room_name: "CUHK2",
+            party_room_name: "CUHK4",
             party_room_number: "12345678",
             address: "CUHK",
             district: "Kwun Tong",
-            description: "CUHK",
+            description: "香港中文大學，簡稱中文大學、中大、港中文，是一所坐落於香港沙田馬料水的公立研究型大學，也是香港第一所研究型大學。香港中文大學由新亞書院、崇基學院及聯合書院於1963年合併而成，現已發展成為轄九大書院的書院制大學。香港中文大學起源於清朝中期至民國初年在大陸地區成立的教會大學和私人大學，是香港歷史源流最久遠的高等學府。",
             quotaMin: 2,
             quotaMax: 20,
             price_setting: [{
