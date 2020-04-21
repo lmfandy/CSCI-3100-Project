@@ -76,15 +76,15 @@
     </div>
   </section>
 
-  <section id="addPartyRoomPage" style="display: none">
-    <div id="scrollTo" class="container" style="padding-top: 70px">
+  <!-- <section id="addPartyRoomPage" style="display: none"> -->
+  <section id="addPartyRoomPage">
+    <div id="scrollTo" class="container " style="padding-top: 70px">
       <h1>Add Party Room</h1>
-      <hr>
-      <form id="partyRoomInfoForm" action="/ownerSignup/partyRoomInfo" method="POST">
-        <div class="form-group">
-          <label>Party Room Name <span class="requiredMark">*</span>
-            <input id="partyRoomName" name="partyRoomName" type="text" class="form-control"
-              placeholder="Enter name of party room">
+    	<hr>
+    	<form id="partyRoomInfoForm" name="partyRoomInfoForm" method = "POST" action="/create_partyroom/create">
+    	  <div class="form-group">
+    	    <label for="party_room_name">Party Room Name
+    	    <input id="partyRoomName" name="partyRoomName" type="text" class="form-control" id="partyroomname" placeholder="Enter name of party room">
           </label>
         </div>
         <div class="form-group">
@@ -102,8 +102,12 @@
           </label>
           <!-- <button>Confirm Address</button> -->
         </div>
-        <iframe id="addressMap" width="300" height=100% frameborder="0" style="display: none"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC7xcCJQ_UttAhR4MxsHau0pb4joskoAEg&q=九龍觀塘成業街成運工業大廈3樓14室"
+        <iframe
+          id="addressMap"
+          width="100%"
+          height="300"
+          frameborder="0"
+          style="display: none"
           allowfullscreen>
         </iframe>
         <!-- <div class="form-group">
