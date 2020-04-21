@@ -33,7 +33,7 @@
   <div class="container " style="padding-top: 100px">
     <h1>Party Room Owner Register</h1>
     <hr>
-    <form id="ownerInfoForm" action="/ownerSignup/signup" method="POST">
+    <form id="ownerInfoForm" action="./owners/add" method="POST">
       <div class="form-group">
         <label>Party Room Company Name <span class="requiredMark">*</span>
           <input name="companyName" type="text" class="form-control" placeholder="Enter Company Name" required>
@@ -71,12 +71,13 @@
         </label>
       </div>
       <p><span class="requiredMark">*</span>required</p>
-    </form>
-    <input type="submit" class="btn btn-primary" value="Submit">
+      <input type="submit" class="btn btn-primary" value="Submit">
 
-    </br><br>
-    <button id="addPartyRoomBtn" type="button" class="btn btn-primary">Go to Add Party Room</button>
-    <button type="reset" class="btn btn-primary">Reset</button>
+      </br><br>
+      <button id="addPartyRoomBtn" type="button" class="btn btn-primary">Go to Add Party Room</button>
+      <button type="reset" class="btn btn-primary">Reset</button>
+    </form>
+
 
   </div>
 </section>
