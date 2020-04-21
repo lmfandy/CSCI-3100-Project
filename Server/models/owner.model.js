@@ -1,21 +1,22 @@
 const mongoose = require('mongoose');
+const conn = mongoose.createConnection("mongodb+srv://jacky:jacky310@cluster0-5jjxe.gcp.mongodb.net/PartyRoomBooking?retryWrites=true&w=majority");
 const Schema = mongoose.Schema;
 
 const owner_schema = new Schema({
-    owner_name: {
+    companyName: {
         type: String,
         required: true,
+        unique: true
+    },
+    name: {
+        type: String,
+        required: true,
+
     },
     username: {
         type: String,
         required: true,
-        unique: true,
-        trim: true,
-        minlength: 5,
-    },
-    party_room_name: {
-        type: String,
-        required: true,
+        unique: true
     },
     email:{
         type: String,
@@ -24,13 +25,15 @@ const owner_schema = new Schema({
     password:{
         type: String,
         required: true,
-        trim: true,
-        minlength: 5,
+    },
+    phone:{
+        type: String,
+        required: true,
     }
+
 }, {
     timestamps: true,
 });
 
-const Owner = mongoose.model('Owner', owner_schema);
-
-module.exports = Owner;
+const owner = conn.model('owner',owner_schema);
+module.exports = owner;
