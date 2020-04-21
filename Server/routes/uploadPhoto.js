@@ -3,6 +3,7 @@ const upload = require("./uploadPhotoMiddleware");
 const uploadPhoto = async (req, res) => {
   try {
     await upload(req, res);
+    console.log(req.files);
     if (req.files == undefined) {
       return res.send("You must select a file.");
     }
