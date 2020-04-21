@@ -81,13 +81,14 @@ conn.once('open', () => {
 });
 
 app.get('/search', (req, res) => {
-  PartyRoom.find({}, async (err, r)=>{
+  PartyRoom.find({}, async (err, r) => {
+    if (err) throw err;
     console.log(r);
     console.log("Search Success!!!");
     var result = [];
-    for (let i = 0; i < r.length; i++){
+    for (let i = 0; i < r.length; i++) {
       let image = "";
-      gfs.files.findOne({_id: r[i].photos[0]}, (err, file) => {
+      gfs.files.findOne({ _id: r[i].photos[0] }, (err, file) => {
         if (!file || file.length === 0) {
           return res.status(404).json({
             err: 'No files exist'
@@ -99,10 +100,11 @@ app.get('/search', (req, res) => {
         });
         readstream.on('end', () => {
           result.push({
+            id: r[i].party_room_id,
             img: image,
             title: r[i].party_room_name,
             description: r[i].description,
-            capacity: "min: "+r[i].quotaMin+" max: "+r[i].quotaMax,
+            capacity: r[i].quotaMin + " ~ " + r[i].quotaMax,
             location: r[i].district,
             price: "See More"
           });
@@ -113,55 +115,55 @@ app.get('/search', (req, res) => {
       res.send({
         hasResult: r.length, result: result
       });
-    }, 500);
+    }, 4000);
   });
 });
 
-app.post('/addPartyTest', function(req,res){
-    PartyRoom.find({}, 'party_room_id').sort({party_room_id: -1}).limit(1).exec(function(err, maxIdRoom) {
-      if (err) res.send(err);
-      if (maxIdRoom.length == 1) {
-        maxId = maxIdRoom[0].party_room_id;
-      }
-      else {
-        maxId = 0;
-      }
-      client.connect(err => {
-        const collection = client.db("PartyRoomBooking").collection("photos.files");
-        collection.findOne({ filename: "456_test3.jpg"}, (err, p) => {
-          var r = new PartyRoom({
-            party_room_id: maxId+1,
-            party_room_name: "CUHK3",
-            party_room_number: "12345678",
-            address: "CUHK",
-            district: "Kwun Tong",
-            description: "香港中文大學，簡稱中文大學、中大、港中文，是一所坐落於香港沙田馬料水的公立研究型大學，也是香港第一所研究型大學。香港中文大學由新亞書院、崇基學院及聯合書院於1963年合併而成，現已發展成為轄九大書院的書院制大學。香港中文大學起源於清朝中期至民國初年在大陸地區成立的教會大學和私人大學，是香港歷史源流最久遠的高等學府。",
-            quotaMin: 2,
-            quotaMax: 20,
-            price_setting: [{
-              day: "Monday to Thursday",
-              startTime: "08:00:00",
-              endTime: "12:00:00",
-              price: 100
-            },{
-              day: "Friday",
-              startTime: "08:00:00",
-              endTime: "12:00:00",
-              price: 100
-            }],
-            facilities: ["VR","Switch"],
-            photos: [p._id]
-          });
+app.post('/addPartyTest', function (req, res) {
+  PartyRoom.find({}, 'party_room_id').sort({ party_room_id: -1 }).limit(1).exec(function (err, maxIdRoom) {
+    if (err) res.send(err);
+    if (maxIdRoom.length == 1) {
+      maxId = maxIdRoom[0].party_room_id;
+    }
+    else {
+      maxId = 0;
+    }
+    client.connect(err => {
+      const collection = client.db("PartyRoomBooking").collection("photos.files");
+      collection.findOne({ filename: "456_test3.jpg" }, (err, p) => {
+        var r = new PartyRoom({
+          party_room_id: maxId + 1,
+          party_room_name: "CUHK3",
+          party_room_number: "12345678",
+          address: "CUHK",
+          district: "Kwun Tong",
+          description: "香港中文大學，簡稱中文大學、中大、港中文，是一所坐落於香港沙田馬料水的公立研究型大學，也是香港第一所研究型大學。香港中文大學由新亞書院、崇基學院及聯合書院於1963年合併而成，現已發展成為轄九大書院的書院制大學。香港中文大學起源於清朝中期至民國初年在大陸地區成立的教會大學和私人大學，是香港歷史源流最久遠的高等學府。",
+          quotaMin: 2,
+          quotaMax: 20,
+          price_setting: [{
+            day: "Monday to Thursday",
+            startTime: "08:00:00",
+            endTime: "12:00:00",
+            price: 100
+          }, {
+            day: "Friday",
+            startTime: "08:00:00",
+            endTime: "12:00:00",
+            price: 100
+          }],
+          facilities: ["VR", "Switch"],
+          photos: [p._id]
+        });
 
-          r.save(function(err) {
-            if (err) res.send(err);
-            else{
-              res.send("done");
-            }
-          });
+        r.save(function (err) {
+          if (err) res.send(err);
+          else {
+            res.send("done");
+          }
         });
       });
     });
+  });
 });
 
 // For Login page
@@ -179,8 +181,11 @@ app.use('/ownerSignup', ownerSignup);
 const customer_info = require('./routes/customer_info');
 app.use('/customer', customer_info);
 
-//const owner_info = require('./routes/owner_info');
-//app.use('/owner', owner_info);
+const owner_info = require('./routes/owner_info');
+app.use('/owner', owner_info);
+
+const room_info = require('./routes/room_info');
+app.use('/partyRoom', room_info);
 
 const createPartyRoom = require('./routes/create_partyroom');
 app.use('/create_partyroom', createPartyRoom);
