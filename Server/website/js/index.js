@@ -80,11 +80,12 @@ $(function () {
 
   $("#mainSearchBarCloseBtn").click(() => $("#mainSearchBar").slideUp("slow"));
 
-  $("#priceRange").on("input", () => $("#priceValue").html("Price: $" + $("#priceRange").val() + " / person"));
+  $("#priceRange").on("input", () => $("#priceValue").html("Each hour Price: $" + $("#priceRange").val() + " / person"));
 
   $("#searchForm").submit(function (e) {
     var form = $(this);
     var url = form.attr('action');
+    console.log(form.serialize());
     $.ajax({
       type: "GET",
       async: false,
