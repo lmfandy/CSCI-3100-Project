@@ -81,6 +81,7 @@ conn.once('open', () => {
 });
 
 app.get('/search', (req, res) => {
+  var d = new Date(req.query.date);
   console.log(d.getDay());
   var query = { party_room_name: req.query.partyRoomName,
     district: req.query.district,
