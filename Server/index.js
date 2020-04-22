@@ -92,41 +92,41 @@ app.get('/search', (req, res) => {
   if (req.query.partyRoomName == '') delete query.party_room_name;
   if (req.query.district == '') delete query.district;
   console.log(query);
-
-  PartyRoom.find(query , async (err, r)=>{
-    console.log("Search Success!!!");
-    if (err) console.log(err);
-    console.log(r);
-    var result = [];
-    for (let i = 0; i < r.length; i++){
-      let image = "";
-      gfs.files.findOne({_id: r[i].photos[0]}, (err, file) => {
-        if (!file || file.length === 0) {
-          return res.status(404).json({
-            err: 'No files exist'
+  var result = [];
+  PartyRoom.find(query , (err, r)=>{
+    if (err) return res.send(err);
+    else {
+      console.log(r);
+      for (let i = 0; i < r.length; i++){
+        let image = "";
+        gfs.files.findOne({_id: r[i].photos[0]}, (err, file) => {
+          if (!file || file.length === 0) {
+            return res.status(404).json({
+              err: 'No  images'
+            });
+          }
+          const readstream = gfs.createReadStream(file.filename);
+          readstream.on('data', (chunk) => {
+            image += chunk.toString('base64');
           });
-        }
-        const readstream = gfs.createReadStream(file.filename);
-        readstream.on('data', (chunk) => {
-          image += chunk.toString('base64');
+          readstream.on('end', () => {
+            result.push({
+              img: image,
+              title: r[i].party_room_name,
+              description: r[i].description,
+              capacity: "min: "+r[i].quotaMin+" max: "+r[i].quotaMax,
+              location: r[i].district,
+              price: "See More"
+            });
+            if(result.length == r.length){
+              return res.send({
+                hasResult: r.length, result: result
+              });
+            }
+          });
         });
-        readstream.on('end', () => {
-          result.push({
-            img: image,
-            title: r[i].party_room_name,
-            description: r[i].description,
-            capacity: "min: "+r[i].quotaMin+" max: "+r[i].quotaMax,
-            location: r[i].district,
-            price: "See More"
-          });
-        })
-      });
+      }
     }
-    setTimeout(() => {
-      res.send({
-        hasResult: r.length, result: result
-      });
-    }, 500);
   });
 });
 
